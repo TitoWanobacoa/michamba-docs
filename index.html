@@ -53,6 +53,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
     <button class="tab" onclick="show('cls',this)">Clases UML</button>
     <button class="tab" onclick="show('seq',this)">Secuencia</button>
     <button class="tab" onclick="show('der',this)">DER</button>
+    <button class="tab" onclick="show('arq',this)">Arquitectura</button>
     <button class="tab" onclick="show('comp',this)">Componentes</button>
     <button class="tab" onclick="show('gantt',this)">Gantt</button>
     
@@ -789,6 +790,210 @@ gantt
 </div>
 </div>
 </div>
+<!-- ===== ARQUITECTURA ===== -->
+<div id="arq" class="section">
+<h2>Diagrama de arquitectura</h2>
+<p class="sub">Vista del sistema Mi Chamba desde una perspectiva arquitectónica: actores, plataformas de acceso, capa de servicios y capa de datos. Se muestran los aspectos más importantes del diseño, dejando los detalles de implementación de lado.</p>
+
+<!-- VISTA LÓGICA -->
+<div class="dbox">
+<div class="dlabel">Vista lógica — actores, plataformas y servicios</div>
+<div style="overflow-x:auto">
+<div style="min-width:700px;padding:8px 0">
+
+<div style="display:flex;gap:12px;margin-bottom:16px">
+
+  <!-- CLIENTE -->
+  <div style="flex:1;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;padding:14px 16px">
+    <div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Cliente</div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;background:#fff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 8px;text-align:center">
+        <div style="font-size:22px;margin-bottom:4px">🖥</div>
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Web App</div>
+        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Publicar pedidos</div>
+        <div style="font-size:10.5px;color:#64748b">Ver propuestas</div>
+        <div style="font-size:10.5px;color:#64748b">Chat · Reseñas</div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 8px;text-align:center">
+        <div style="font-size:22px;margin-bottom:4px">📱</div>
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Mobile App</div>
+        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Publicar pedidos</div>
+        <div style="font-size:10.5px;color:#64748b">Propuestas · Chat</div>
+        <div style="font-size:10.5px;color:#64748b">Notificaciones push</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPECIALISTA -->
+  <div style="flex:1;background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 16px">
+    <div style="font-size:11px;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Especialista</div>
+    <div style="display:flex;gap:8px">
+      <div style="flex:1;background:#fff;border:1px solid #bbf7d0;border-radius:7px;padding:10px 8px;text-align:center">
+        <div style="font-size:22px;margin-bottom:4px">🖥</div>
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Web App</div>
+        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Perfil profesional</div>
+        <div style="font-size:10.5px;color:#64748b">Feed de pedidos</div>
+        <div style="font-size:10.5px;color:#64748b">Verificación de identidad</div>
+      </div>
+      <div style="flex:1;background:#fff;border:1px solid #bbf7d0;border-radius:7px;padding:10px 8px;text-align:center">
+        <div style="font-size:22px;margin-bottom:4px">📱</div>
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Mobile App</div>
+        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Feed filtrado</div>
+        <div style="font-size:10.5px;color:#64748b">Enviar propuestas</div>
+        <div style="font-size:10.5px;color:#64748b">Notificaciones push</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div style="flex:0 0 160px;background:#fef3c7;border:1.5px solid #fcd34d;border-radius:10px;padding:14px 16px">
+    <div style="font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Administrador</div>
+    <div style="background:#fff;border:1px solid #fde68a;border-radius:7px;padding:10px 8px;text-align:center">
+      <div style="font-size:22px;margin-bottom:4px">🖥</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Panel Admin</div>
+      <div style="font-size:10.5px;color:#64748b;margin-top:3px">Gestión de usuarios</div>
+      <div style="font-size:10.5px;color:#64748b">Verificaciones</div>
+      <div style="font-size:10.5px;color:#64748b">Reclamos · Reportes</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FLECHA -->
+<div style="text-align:center;color:#94a3b8;font-size:13px;margin:2px 0;letter-spacing:1px">
+  ↓   REST / HTTPS   ·   WebSocket (WSS)   ·   Push Notifications   ↓
+</div>
+
+<!-- API GATEWAY -->
+<div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:10px;padding:12px 16px;margin:10px 0;text-align:center">
+  <div style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">API Gateway · NestJS</div>
+  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Auth Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Order Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Proposal Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Chat Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Notification Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Admin Service</span>
+    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">File Service</span>
+  </div>
+</div>
+
+<!-- FLECHA -->
+<div style="text-align:center;color:#94a3b8;font-size:13px;margin:2px 0">
+  ↓   Prisma ORM · Queries parametrizadas   ↓
+</div>
+
+<!-- CAPA DE DATOS -->
+<div style="display:flex;gap:12px;margin-top:10px">
+  <div style="flex:2;background:#f5f3ff;border:1.5px solid #a78bfa;border-radius:10px;padding:12px 14px;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#6d28d9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Base de datos principal</div>
+    <div style="font-size:13px;font-weight:600;color:#1e293b">PostgreSQL</div>
+    <div style="font-size:11px;color:#64748b;margin-top:4px">Usuarios · Pedidos · Propuestas · Chats · Reseñas · Reclamos</div>
+  </div>
+  <div style="flex:1;background:#fff7ed;border:1.5px solid #fdba74;border-radius:10px;padding:12px 14px;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Cache</div>
+    <div style="font-size:13px;font-weight:600;color:#1e293b">Redis</div>
+    <div style="font-size:11px;color:#64748b;margin-top:4px">Sesiones · WebSocket rooms</div>
+  </div>
+  <div style="flex:1;background:#fdf4ff;border:1.5px solid #e879f9;border-radius:10px;padding:12px 14px;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#86198f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Storage</div>
+    <div style="font-size:13px;font-weight:600;color:#1e293b">Cloudinary / S3</div>
+    <div style="font-size:11px;color:#64748b;margin-top:4px">Fotos de perfil · Documentos de verificación</div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- VISTA DESPLIEGUE -->
+<div class="dbox">
+<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
+<div style="overflow-x:auto">
+<div style="min-width:700px;padding:8px 0">
+
+<div style="display:flex;gap:12px;align-items:stretch">
+
+  <!-- CLIENTES -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
+    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
+    </div>
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:80px;text-align:center">
+    <div style="font-size:20px">⟷</div>
+    <div>HTTPS</div>
+    <div style="margin-top:10px;font-size:20px">⟷</div>
+    <div>WSS</div>
+  </div>
+
+  <!-- BACKEND -->
+  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
+    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
+      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
+      </div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:60px;text-align:center">
+    <div style="font-size:20px">⟶</div>
+    <div>HTTP</div>
+  </div>
+
+  <!-- SERVICIOS EXTERNOS -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
+    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
+      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
+    </div>
+    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
+<div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
+      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
+    </div>
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
+      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEYENDA -->
+<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
+  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
+  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
+  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
+  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
+</div>
+
+</div>
+</div>
+</div>
+
+</div><!-- /arq -->
 
 
 </div><!-- /wrap -->
