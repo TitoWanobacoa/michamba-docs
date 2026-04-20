@@ -54,6 +54,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
     <button class="tab" onclick="show('der',this)">DER</button>
     <button class="tab" onclick="show('comp',this)">Componentes</button>
     <button class="tab" onclick="show('gantt',this)">Gantt</button>
+    <button class="tab" onclick="show('rnf',this)">RNF</button>
   </div>
 </div>
 
@@ -731,6 +732,61 @@ gantt
 </div>
 </div>
 </div>
+
+<!-- ===== RNF ===== -->
+<div id="rnf" class="section">
+<h2>Requisitos no funcionales</h2>
+<p class="sub">Atributos de calidad del sistema Mi Chamba. Aplican tanto a la plataforma web como a la aplicación Android salvo indicación contraria.</p>
+
+<table>
+<thead><tr><th>ID</th><th>Categoría</th><th>Nombre</th><th>Descripción</th><th>Métrica / criterio de aceptación</th><th>Prioridad</th></tr></thead>
+<tbody>
+
+<tr class="grp"><td colspan="6">Rendimiento</td></tr>
+<tr><td><code>RNF-01</code></td><td>Rendimiento</td><td>Tiempo de respuesta de la API</td><td>Las llamadas a la API REST deben responder en condiciones normales de carga.</td><td>P95 ≤ 500 ms para endpoints de lectura; ≤ 1000 ms para escritura.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-02</code></td><td>Rendimiento</td><td>Latencia del chat</td><td>Los mensajes enviados por WebSocket deben entregarse al destinatario con baja latencia.</td><td>Latencia extremo a extremo ≤ 300 ms en condiciones normales de red.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-03</code></td><td>Rendimiento</td><td>Carga de la página web</td><td>La plataforma web debe cargarse rápidamente en dispositivos de gama media con conexión móvil.</td><td>First Contentful Paint ≤ 2 s. Largest Contentful Paint ≤ 3 s.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-04</code></td><td>Rendimiento</td><td>Usuarios concurrentes</td><td>El sistema debe soportar un número razonable de usuarios activos simultáneamente en el MVP sin degradación notable.</td><td>Sin degradación medible con hasta 200 usuarios concurrentes.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-05</code></td><td>Rendimiento</td><td>Paginación de feeds</td><td>Los feeds de pedidos y listas extensas deben paginar resultados para no sobrecargar la red ni el cliente.</td><td>Máximo 20 ítems por página. Cursor-based pagination en la API.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Seguridad</td></tr>
+<tr><td><code>RNF-06</code></td><td>Seguridad</td><td>Cifrado de contraseñas</td><td>Las contraseñas de usuario no deben almacenarse en texto plano en ningún caso.</td><td>Hash con bcrypt, factor de costo mínimo 12. Sin almacenamiento de contraseña en claro.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-07</code></td><td>Seguridad</td><td>Transporte cifrado</td><td>Toda comunicación entre clientes y servidor debe realizarse sobre conexiones cifradas.</td><td>HTTPS obligatorio en todos los endpoints. HTTP redirige a HTTPS. WebSocket sobre WSS.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-08</code></td><td>Seguridad</td><td>Gestión de tokens JWT</td><td>Los tokens de acceso deben tener vida corta. Los refresh tokens deben rotarse al usarse.</td><td>Access token: expiración ≤ 15 min. Refresh token: expiración ≤ 7 días con rotación.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-09</code></td><td>Seguridad</td><td>Autorización por rol</td><td>Los endpoints de la API deben verificar el rol del usuario autenticado antes de ejecutar cualquier acción.</td><td>Guards de NestJS aplicados a todos los controladores. Tests de acceso cruzado entre roles.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-10</code></td><td>Seguridad</td><td>Protección contra XSS</td><td>El sistema debe sanitizar todas las entradas de usuario antes de almacenarlas o renderizarlas.</td><td>Salida de datos de usuario siempre escapada. Sin innerHTML con datos sin sanitizar.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-11</code></td><td>Seguridad</td><td>Protección contra inyección SQL</td><td>No deben construirse queries SQL concatenando strings de entrada del usuario.</td><td>Todas las consultas a la base de datos a través de Prisma (queries parametrizadas). Cero SQL crudo con interpolación de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-12</code></td><td>Seguridad</td><td>Rate limiting</td><td>Los endpoints de autenticación y publicación deben limitar la cantidad de solicitudes por IP para prevenir ataques de fuerza bruta y spam.</td><td>Máximo 10 intentos de login por IP por minuto. Máximo 20 publicaciones de pedido por usuario por hora.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-13</code></td><td>Seguridad</td><td>Validación de archivos subidos</td><td>Los documentos subidos para verificación deben validarse en tipo y tamaño antes de almacenarse.</td><td>Tipos permitidos: PDF, JPG, PNG. Tamaño máximo: 5 MB por archivo.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Usabilidad</td></tr>
+<tr><td><code>RNF-14</code></td><td>Usabilidad</td><td>Diseño responsive web</td><td>La plataforma web debe funcionar correctamente en resoluciones de escritorio, tablet y móvil.</td><td>Sin scroll horizontal ni elementos superpuestos en viewports desde 375 px hasta 1920 px.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-15</code></td><td>Usabilidad</td><td>Compatibilidad de navegadores</td><td>La web debe funcionar correctamente en los navegadores de mayor uso.</td><td>Chrome, Firefox y Safari en sus dos últimas versiones principales. Edge en su última versión.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-16</code></td><td>Usabilidad</td><td>Mensajes de error comprensibles</td><td>Los mensajes de error del sistema deben ser claros para el usuario final, sin exponer detalles técnicos internos.</td><td>Ningún stack trace ni mensaje de base de datos visible en la interfaz de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-17</code></td><td>Usabilidad</td><td>Feedback de acciones</td><td>El sistema debe confirmar visualmente al usuario el resultado de cada acción relevante (publicar pedido, enviar propuesta, etc.).</td><td>Toda acción con efecto persistente muestra un mensaje de éxito o error en ≤ 1 s.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-18</code></td><td>Usabilidad</td><td>Accesibilidad básica</td><td>La interfaz web debe ser navegable con teclado y compatible con lectores de pantalla básicos.</td><td>Todos los formularios tienen labels asociados. Imágenes tienen texto alternativo. Contraste de color ≥ 4.5:1 (WCAG AA).</td><td><span class="b-hi lo">Baja</span></td></tr>
+
+<tr class="grp"><td colspan="6">Disponibilidad y confiabilidad</td></tr>
+<tr><td><code>RNF-19</code></td><td>Disponibilidad</td><td>Uptime del servicio</td><td>El sistema debe estar disponible la mayor parte del tiempo en horario de uso típico.</td><td>Disponibilidad ≥ 99 % mensual. Mantenimientos programados fuera del horario pico (00:00–06:00 ART).</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-20</code></td><td>Disponibilidad</td><td>Manejo de errores del servidor</td><td>Ante fallos internos, el sistema debe responder con códigos HTTP apropiados sin exponer información sensible.</td><td>Errores 5xx retornan JSON con mensaje genérico. Logging interno del error completo.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-21</code></td><td>Disponibilidad</td><td>Backups de la base de datos</td><td>Los datos de usuarios, pedidos y transacciones deben respaldarse periódicamente.</td><td>Backup automático diario del PostgreSQL administrado. Retención mínima de 7 días.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-22</code></td><td>Confiabilidad</td><td>Consistencia de datos</td><td>Las operaciones críticas (aceptar propuesta, cambiar estado de pedido) deben ser atómicas para evitar estados inconsistentes.</td><td>Uso de transacciones de base de datos en operaciones que modifican múltiples tablas.</td><td><span class="b-hi hi">Alta</span></td></tr>
+
+<tr class="grp"><td colspan="6">Escalabilidad y mantenibilidad</td></tr>
+<tr><td><code>RNF-23</code></td><td>Escalabilidad</td><td>Escalado horizontal del backend</td><td>El backend debe poder escalar agregando instancias sin cambios de arquitectura significativos.</td><td>El servidor NestJS no guarda estado en memoria entre requests. Sesiones en Redis (post-MVP).</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-24</code></td><td>Escalabilidad</td><td>Separación por módulos</td><td>La arquitectura del backend debe permitir modificar o reemplazar un módulo sin afectar a los demás.</td><td>Cada dominio (auth, pedidos, propuestas, chat, etc.) en su propio módulo NestJS con interfaces definidas.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-25</code></td><td>Mantenibilidad</td><td>Cobertura de tests</td><td>El código crítico del backend debe contar con tests automatizados para prevenir regresiones.</td><td>Cobertura mínima del 60 % en servicios de dominio. Tests de integración para los flujos principales.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-26</code></td><td>Mantenibilidad</td><td>Documentación de la API</td><td>La API REST debe estar documentada de forma que cualquier miembro del equipo pueda consumirla sin consultar el código fuente.</td><td>Swagger generado automáticamente con @nestjs/swagger. Disponible en /api/docs en entorno de desarrollo.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-27</code></td><td>Mantenibilidad</td><td>Tipado estricto</td><td>El código TypeScript del proyecto debe ejecutarse sin errores de tipo en modo estricto.</td><td>strict: true en tsconfig. CI rechaza builds con errores de tipo.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Privacidad y datos personales</td></tr>
+<tr><td><code>RNF-28</code></td><td>Privacidad</td><td>Datos mínimos requeridos</td><td>El sistema solo debe solicitar los datos personales estrictamente necesarios para el funcionamiento de la plataforma.</td><td>Sin campos opcionales marcados como obligatorios. Sin recolección de datos de ubicación en tiempo real.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-29</code></td><td>Privacidad</td><td>Acceso a datos propios</td><td>Cada usuario solo puede acceder y modificar su propia información personal.</td><td>Ningún endpoint expone datos de un usuario a otro sin relación activa (pedido compartido).</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-30</code></td><td>Privacidad</td><td>Eliminación de cuenta</td><td>El usuario debe poder solicitar la eliminación de su cuenta y datos personales.</td><td>Funcionalidad de baja de cuenta disponible. Datos personales anonimizados o eliminados en un plazo razonable.</td><td><span class="b-hi lo">Baja</span></td></tr>
+
+</tbody>
+</table>
+</div><!-- /rnf -->
 
 </div><!-- /wrap -->
 
