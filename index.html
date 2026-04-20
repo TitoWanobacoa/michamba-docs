@@ -734,6 +734,92 @@ graph TB
     FILES --> FS
 </div>
 </div>
+  <!-- VISTA DESPLIEGUE -->
+<div class="dbox">
+<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
+<div style="overflow-x:auto">
+<div style="min-width:700px;padding:8px 0">
+
+<div style="display:flex;gap:12px;align-items:stretch">
+
+  <!-- CLIENTES -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
+    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
+    </div>
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:80px;text-align:center">
+    <div style="font-size:20px">⟷</div>
+    <div>HTTPS</div>
+    <div style="margin-top:10px;font-size:20px">⟷</div>
+    <div>WSS</div>
+  </div>
+
+  <!-- BACKEND -->
+  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
+    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
+      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
+      </div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLECHAS -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:60px;text-align:center">
+    <div style="font-size:20px">⟶</div>
+    <div>HTTP</div>
+  </div>
+
+  <!-- SERVICIOS EXTERNOS -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
+    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
+      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
+    </div>
+    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
+<div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
+      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
+    </div>
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
+      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LEYENDA -->
+<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
+  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
+  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
+  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
+  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
+</div>
+
+</div>
+</div>
+</div>
 </div>
 
 <!-- ===== GANTT ===== -->
@@ -906,92 +992,7 @@ gantt
 </div>
 </div>
 
-<!-- VISTA DESPLIEGUE -->
-<div class="dbox">
-<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
-<div style="overflow-x:auto">
-<div style="min-width:700px;padding:8px 0">
 
-<div style="display:flex;gap:12px;align-items:stretch">
-
-  <!-- CLIENTES -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
-    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
-    </div>
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
-    </div>
-  </div>
-
-  <!-- FLECHAS -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:80px;text-align:center">
-    <div style="font-size:20px">⟷</div>
-    <div>HTTPS</div>
-    <div style="margin-top:10px;font-size:20px">⟷</div>
-    <div>WSS</div>
-  </div>
-
-  <!-- BACKEND -->
-  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
-    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
-      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
-      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
-      </div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLECHAS -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:60px;text-align:center">
-    <div style="font-size:20px">⟶</div>
-    <div>HTTP</div>
-  </div>
-
-  <!-- SERVICIOS EXTERNOS -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
-    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
-      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
-    </div>
-    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
-<div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
-      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
-    </div>
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
-      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- LEYENDA -->
-<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
-  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
-  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
-  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
-  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
-</div>
-
-</div>
-</div>
-</div>
 
 </div><!-- /arq -->
 
