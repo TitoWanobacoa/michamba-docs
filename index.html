@@ -47,16 +47,15 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
   <div class="tabs">
     <button class="tab active" onclick="show('rf-web',this)">RF Web</button>
     <button class="tab" onclick="show('rf-apk',this)">RF Android</button>
-    <button class="tab" onclick="show('rnf',this)">RNF</button>
     <button class="tab" onclick="show('test',this)">Casos de prueba</button>
     <button class="tab" onclick="show('uc',this)">Casos de uso</button>
     <button class="tab" onclick="show('cls',this)">Clases UML</button>
     <button class="tab" onclick="show('seq',this)">Secuencia</button>
     <button class="tab" onclick="show('der',this)">DER</button>
-    <button class="tab" onclick="show('arq',this)">Arquitectura</button>
     <button class="tab" onclick="show('comp',this)">Componentes</button>
     <button class="tab" onclick="show('gantt',this)">Gantt</button>
-    
+    <button class="tab" onclick="show('rnf',this)">RNF</button>
+    <button class="tab" onclick="show('arq',this)">Arquitectura</button>
   </div>
 </div>
 
@@ -140,66 +139,10 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
 </table>
 </div>
 
-  <!-- ===== RNF ===== -->
-<div id="rnf" class="section">
-<h2>Requisitos no funcionales</h2>
-<p class="sub">Atributos de calidad del sistema Mi Chamba.</p>
-
-<table>
-<thead><tr><th>ID</th><th>Categoría</th><th>Nombre</th><th>Descripción</th><th>Métrica / criterio de aceptación</th><th>Prioridad</th></tr></thead>
-<tbody>
-
-<tr class="grp"><td colspan="6">Rendimiento</td></tr>
-<tr><td><code>RNF-01</code></td><td>Rendimiento</td><td>Tiempo de respuesta de la API</td><td>Las llamadas a la API REST deben responder en condiciones normales de carga.</td><td>P95 ≤ 500 ms para endpoints de lectura; ≤ 1000 ms para escritura.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-02</code></td><td>Rendimiento</td><td>Latencia del chat</td><td>Los mensajes enviados por WebSocket deben entregarse al destinatario con baja latencia.</td><td>Latencia extremo a extremo ≤ 300 ms en condiciones normales de red.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-03</code></td><td>Rendimiento</td><td>Carga de la página web</td><td>La plataforma web debe cargarse rápidamente en dispositivos de gama media con conexión móvil.</td><td>First Contentful Paint ≤ 2 s. Largest Contentful Paint ≤ 3 s.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-04</code></td><td>Rendimiento</td><td>Usuarios concurrentes</td><td>El sistema debe soportar un número razonable de usuarios activos simultáneamente en el MVP sin degradación notable.</td><td>Sin degradación medible con hasta 200 usuarios concurrentes.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-05</code></td><td>Rendimiento</td><td>Paginación de feeds</td><td>Los feeds de pedidos y listas extensas deben paginar resultados para no sobrecargar la red ni el cliente.</td><td>Máximo 20 ítems por página. Cursor-based pagination en la API.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Seguridad</td></tr>
-<tr><td><code>RNF-06</code></td><td>Seguridad</td><td>Cifrado de contraseñas</td><td>Las contraseñas de usuario no deben almacenarse en texto plano en ningún caso.</td><td>Hash con bcrypt, factor de costo mínimo 12. Sin almacenamiento de contraseña en claro.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-07</code></td><td>Seguridad</td><td>Transporte cifrado</td><td>Toda comunicación entre clientes y servidor debe realizarse sobre conexiones cifradas.</td><td>HTTPS obligatorio en todos los endpoints. HTTP redirige a HTTPS. WebSocket sobre WSS.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-08</code></td><td>Seguridad</td><td>Gestión de tokens JWT</td><td>Los tokens de acceso deben tener vida corta. Los refresh tokens deben rotarse al usarse.</td><td>Access token: expiración ≤ 15 min. Refresh token: expiración ≤ 7 días con rotación.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-09</code></td><td>Seguridad</td><td>Autorización por rol</td><td>Los endpoints de la API deben verificar el rol del usuario autenticado antes de ejecutar cualquier acción.</td><td>Guards de NestJS aplicados a todos los controladores. Tests de acceso cruzado entre roles.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-10</code></td><td>Seguridad</td><td>Protección contra XSS</td><td>El sistema debe sanitizar todas las entradas de usuario antes de almacenarlas o renderizarlas.</td><td>Salida de datos de usuario siempre escapada. Sin innerHTML con datos sin sanitizar.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-11</code></td><td>Seguridad</td><td>Protección contra inyección SQL</td><td>No deben construirse queries SQL concatenando strings de entrada del usuario.</td><td>Todas las consultas a la base de datos a través de Prisma (queries parametrizadas). Cero SQL crudo con interpolación de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-12</code></td><td>Seguridad</td><td>Rate limiting</td><td>Los endpoints de autenticación y publicación deben limitar la cantidad de solicitudes por IP para prevenir ataques de fuerza bruta y spam.</td><td>Máximo 10 intentos de login por IP por minuto. Máximo 20 publicaciones de pedido por usuario por hora.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-13</code></td><td>Seguridad</td><td>Validación de archivos subidos</td><td>Los documentos subidos para verificación deben validarse en tipo y tamaño antes de almacenarse.</td><td>Tipos permitidos: PDF, JPG, PNG. Tamaño máximo: 5 MB por archivo.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Usabilidad</td></tr>
-<tr><td><code>RNF-14</code></td><td>Usabilidad</td><td>Diseño responsive web</td><td>La plataforma web debe funcionar correctamente en resoluciones de escritorio, tablet y móvil.</td><td>Sin scroll horizontal ni elementos superpuestos en viewports desde 375 px hasta 1920 px.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-15</code></td><td>Usabilidad</td><td>Compatibilidad de navegadores</td><td>La web debe funcionar correctamente en los navegadores de mayor uso.</td><td>Chrome, Firefox y Safari en sus dos últimas versiones principales. Edge en su última versión.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-16</code></td><td>Usabilidad</td><td>Mensajes de error comprensibles</td><td>Los mensajes de error del sistema deben ser claros para el usuario final, sin exponer detalles técnicos internos.</td><td>Ningún stack trace ni mensaje de base de datos visible en la interfaz de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-17</code></td><td>Usabilidad</td><td>Feedback de acciones</td><td>El sistema debe confirmar visualmente al usuario el resultado de cada acción relevante (publicar pedido, enviar propuesta, etc.).</td><td>Toda acción con efecto persistente muestra un mensaje de éxito o error en ≤ 1 s.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-18</code></td><td>Usabilidad</td><td>Accesibilidad básica</td><td>La interfaz web debe ser navegable con teclado y compatible con lectores de pantalla básicos.</td><td>Todos los formularios tienen labels asociados. Imágenes tienen texto alternativo. Contraste de color ≥ 4.5:1 (WCAG AA).</td><td><span class="b-hi lo">Baja</span></td></tr>
-
-<tr class="grp"><td colspan="6">Disponibilidad y confiabilidad</td></tr>
-<tr><td><code>RNF-19</code></td><td>Disponibilidad</td><td>Uptime del servicio</td><td>El sistema debe estar disponible la mayor parte del tiempo en horario de uso típico.</td><td>Disponibilidad ≥ 99 % mensual. Mantenimientos programados fuera del horario pico (00:00–06:00 ART).</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-20</code></td><td>Disponibilidad</td><td>Manejo de errores del servidor</td><td>Ante fallos internos, el sistema debe responder con códigos HTTP apropiados sin exponer información sensible.</td><td>Errores 5xx retornan JSON con mensaje genérico. Logging interno del error completo.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-21</code></td><td>Disponibilidad</td><td>Backups de la base de datos</td><td>Los datos de usuarios, pedidos y transacciones deben respaldarse periódicamente.</td><td>Backup automático diario del PostgreSQL administrado. Retención mínima de 7 días.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-22</code></td><td>Confiabilidad</td><td>Consistencia de datos</td><td>Las operaciones críticas (aceptar propuesta, cambiar estado de pedido) deben ser atómicas para evitar estados inconsistentes.</td><td>Uso de transacciones de base de datos en operaciones que modifican múltiples tablas.</td><td><span class="b-hi hi">Alta</span></td></tr>
-
-<tr class="grp"><td colspan="6">Escalabilidad y mantenibilidad</td></tr>
-<tr><td><code>RNF-23</code></td><td>Escalabilidad</td><td>Escalado horizontal del backend</td><td>El backend debe poder escalar agregando instancias sin cambios de arquitectura significativos.</td><td>El servidor NestJS no guarda estado en memoria entre requests. Sesiones en Redis (post-MVP).</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-24</code></td><td>Escalabilidad</td><td>Separación por módulos</td><td>La arquitectura del backend debe permitir modificar o reemplazar un módulo sin afectar a los demás.</td><td>Cada dominio (auth, pedidos, propuestas, chat, etc.) en su propio módulo NestJS con interfaces definidas.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-25</code></td><td>Mantenibilidad</td><td>Cobertura de tests</td><td>El código crítico del backend debe contar con tests automatizados para prevenir regresiones.</td><td>Cobertura mínima del 60 % en servicios de dominio. Tests de integración para los flujos principales.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-26</code></td><td>Mantenibilidad</td><td>Documentación de la API</td><td>La API REST debe estar documentada de forma que cualquier miembro del equipo pueda consumirla sin consultar el código fuente.</td><td>Swagger generado automáticamente con @nestjs/swagger. Disponible en /api/docs en entorno de desarrollo.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-27</code></td><td>Mantenibilidad</td><td>Tipado estricto</td><td>El código TypeScript del proyecto debe ejecutarse sin errores de tipo en modo estricto.</td><td>strict: true en tsconfig. CI rechaza builds con errores de tipo.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Privacidad y datos personales</td></tr>
-<tr><td><code>RNF-28</code></td><td>Privacidad</td><td>Datos mínimos requeridos</td><td>El sistema solo debe solicitar los datos personales estrictamente necesarios para el funcionamiento de la plataforma.</td><td>Sin campos opcionales marcados como obligatorios. Sin recolección de datos de ubicación en tiempo real.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-29</code></td><td>Privacidad</td><td>Acceso a datos propios</td><td>Cada usuario solo puede acceder y modificar su propia información personal.</td><td>Ningún endpoint expone datos de un usuario a otro sin relación activa (pedido compartido).</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-30</code></td><td>Privacidad</td><td>Eliminación de cuenta</td><td>El usuario debe poder solicitar la eliminación de su cuenta y datos personales.</td><td>Funcionalidad de baja de cuenta disponible. Datos personales anonimizados o eliminados en un plazo razonable.</td><td><span class="b-hi lo">Baja</span></td></tr>
-
-</tbody>
-</table>
-</div><!-- /rnf -->
-
-  
 <!-- ===== TEST CASES ===== -->
 <div id="test" class="section">
 <h2>Casos de prueba</h2>
-<p class="sub">Plan de pruebas funcionales, de integración y de seguridad.</p>
+<p class="sub">Plan de pruebas funcionales, de integración y de seguridad. Estado inicial: Pendiente. Se actualiza durante la ejecución del ciclo de QA.</p>
 <table>
 <thead><tr><th>ID</th><th>Módulo / caso</th><th>Precondición</th><th>Pasos</th><th>Resultado esperado</th><th>Estado</th></tr></thead>
 <tbody>
@@ -248,9 +191,9 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
 
 <!-- ===== USE CASES ===== -->
 <div id="uc" class="section">
-<h2>Diagramas de casos de uso.</h2>
-<p class="sub">Diagrama de casos de uso de Cliente, Especialista y Administrador</p>
-
+<h2>Diagramas de casos de uso — corregidos y completados</h2>
+<p class="sub">Revisión integral de los diagramas originales del proyecto con correcciones y el diagrama faltante del administrador.</p>
+<div class="note warn"><strong>Correcciones aplicadas:</strong> (1) Los dos diagramas de cliente solapados (págs. 26 y 27) se unifican en uno solo. (2) Se agrega el diagrama de administrador, ausente en los originales. (3) El diagrama de "Pagos del Especialista" (pág. 30) queda eliminado: los pagos en línea están explícitamente fuera del alcance del MVP. (4) Se agrega "Ver historial de pedidos" al caso de uso de cliente (presente en el Mind Map pero omitido en los diagramas). (5) Se corrigen relaciones include/extend inconsistentes entre casos.</div>
 
 <div class="dbox"><div class="dlabel">Caso de uso — cliente (diagrama unificado y corregido)</div>
 <div class="mermaid">
@@ -575,7 +518,7 @@ sequenceDiagram
 <!-- ===== DER ===== -->
 <div id="der" class="section">
 <h2>Diagrama de entidad-relación (DER)</h2>
-<p class="sub">Modelo relacional de la base de datos de Mi Chamba.</p>
+<p class="sub">Modelo relacional de la base de datos de Mi Chamba. La relación muchos-a-muchos entre <code>perfil_especialista</code> y <code>categoria</code> se implementa con una tabla intermedia.</p>
 <div class="dbox">
 <div class="mermaid">
 erDiagram
@@ -734,98 +677,12 @@ graph TB
     FILES --> FS
 </div>
 </div>
-  <!-- VISTA DESPLIEGUE -->
-<div class="dbox">
-<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
-<div style="overflow-x:auto">
-<div style="min-width:700px;padding:8px 0">
-
-<div style="display:flex;gap:12px;align-items:stretch">
-
-  <!-- CLIENTES -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
-    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
-    </div>
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
-    </div>
-  </div>
-
-  <!-- FLECHAS -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:80px;text-align:center">
-    <div style="font-size:20px">⟷</div>
-    <div>HTTPS</div>
-    <div style="margin-top:10px;font-size:20px">⟷</div>
-    <div>WSS</div>
-  </div>
-
-  <!-- BACKEND -->
-  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
-    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
-      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
-      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
-      </div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLECHAS -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;color:#94a3b8;font-size:11.5px;min-width:60px;text-align:center">
-    <div style="font-size:20px">⟶</div>
-    <div>HTTP</div>
-  </div>
-
-  <!-- SERVICIOS EXTERNOS -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
-    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
-      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
-    </div>
-    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
-<div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
-      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
-    </div>
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
-      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- LEYENDA -->
-<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
-  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
-  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
-  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
-  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
-</div>
-
-</div>
-</div>
-</div>
 </div>
 
 <!-- ===== GANTT ===== -->
 <div id="gantt" class="section">
 <h2>Diagrama de Gantt</h2>
-<p class="sub">Cronograma estimado del proyecto Mi Chamba.</p>
+<p class="sub">Cronograma estimado del proyecto Mi Chamba en 14 semanas, desde la planificación inicial hasta la presentación final.</p>
 <div class="dbox" style="overflow-x:auto;min-height:300px">
 <div class="mermaid">
 gantt
@@ -833,19 +690,19 @@ gantt
     dateFormat YYYY-MM-DD
 
     section Planificación
-    Relevamiento y análisis          :a1, 2025-03-03, 7d
-    Buyer Persona y benchmarking     :a2, 2025-03-03, 7d
+    Relevamiento y análisis          :a1, 2025-04-03, 7d
+    Buyer Persona y benchmarking     :a2, 2025-04-03, 7d
     Definición de requerimientos     :a3, after a1, 7d
     Análisis de viabilidad           :a4, after a1, 5d
 
     section Diseño
-    Arquitectura del sistema         :b1, 2025-03-17, 7d
-    Wireframes y prototipos UX/UI    :b2, 2025-03-17, 10d
-    Landing Page                     :b3, 2025-03-24, 5d
-    Estilo visual y design system    :b4, 2025-03-17, 5d
+    Arquitectura del sistema         :b1, 2025-04-17, 7d
+    Wireframes y prototipos UX/UI    :b2, 2025-04-17, 10d
+    Landing Page                     :b3, 2025-04-24, 5d
+    Estilo visual y design system    :b4, 2025-04-17, 5d
 
     section Backend
-    Setup proyecto y base de datos   :c1, 2025-03-31, 5d
+    Setup proyecto y base de datos   :c1, 2025-04-30, 5d
     Auth Service                     :c2, after c1, 5d
     Order y Proposal Service         :c3, after c2, 7d
     Chat Service WebSocket           :c4, after c3, 5d
@@ -853,29 +710,85 @@ gantt
     Panel de administración          :c6, after c4, 7d
 
     section Frontend Web
-    Módulo de autenticación          :d1, 2025-04-07, 5d
+    Módulo de autenticación          :d1, 2025-05-07, 5d
     Módulo de pedidos                :d2, after d1, 7d
     Módulo propuestas y chat         :d3, after d2, 7d
     Reseñas, perfil y notificaciones :d4, after d3, 5d
 
     section App Android MVP
-    Setup Android                    :e1, 2025-04-21, 5d
+    Setup Android                    :e1, 2025-05-21, 5d
     Auth y pedidos APK               :e2, after e1, 7d
     Propuestas, chat y notificaciones:e3, after e2, 7d
 
     section QA y Pruebas
-    Pruebas funcionales              :f1, 2025-05-19, 7d
+    Pruebas funcionales              :f1, 2025-06-19, 7d
     Pruebas de UX y usabilidad       :f2, after f1, 5d
     Pruebas de seguridad             :f3, after f1, 5d
     Corrección de errores            :f4, after f2, 5d
 
     section Entrega Final
-    Documentación técnica completa   :g1, 2025-06-09, 5d
+    Documentación técnica completa   :g1, 2025-07-09, 5d
     Preparación demo                 :g2, after g1, 3d
     Presentación final               :g3, after g2, 1d
 </div>
 </div>
 </div>
+
+<!-- ===== RNF ===== -->
+<div id="rnf" class="section">
+<h2>Requisitos no funcionales</h2>
+<p class="sub">Atributos de calidad del sistema Mi Chamba. Aplican tanto a la plataforma web como a la aplicación Android salvo indicación contraria.</p>
+
+<table>
+<thead><tr><th>ID</th><th>Categoría</th><th>Nombre</th><th>Descripción</th><th>Métrica / criterio de aceptación</th><th>Prioridad</th></tr></thead>
+<tbody>
+
+<tr class="grp"><td colspan="6">Rendimiento</td></tr>
+<tr><td><code>RNF-01</code></td><td>Rendimiento</td><td>Tiempo de respuesta de la API</td><td>Las llamadas a la API REST deben responder en condiciones normales de carga.</td><td>P95 ≤ 500 ms para endpoints de lectura; ≤ 1000 ms para escritura.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-02</code></td><td>Rendimiento</td><td>Latencia del chat</td><td>Los mensajes enviados por WebSocket deben entregarse al destinatario con baja latencia.</td><td>Latencia extremo a extremo ≤ 300 ms en condiciones normales de red.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-03</code></td><td>Rendimiento</td><td>Carga de la página web</td><td>La plataforma web debe cargarse rápidamente en dispositivos de gama media con conexión móvil.</td><td>First Contentful Paint ≤ 2 s. Largest Contentful Paint ≤ 3 s.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-04</code></td><td>Rendimiento</td><td>Usuarios concurrentes</td><td>El sistema debe soportar un número razonable de usuarios activos simultáneamente en el MVP sin degradación notable.</td><td>Sin degradación medible con hasta 200 usuarios concurrentes.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-05</code></td><td>Rendimiento</td><td>Paginación de feeds</td><td>Los feeds de pedidos y listas extensas deben paginar resultados para no sobrecargar la red ni el cliente.</td><td>Máximo 20 ítems por página. Cursor-based pagination en la API.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Seguridad</td></tr>
+<tr><td><code>RNF-06</code></td><td>Seguridad</td><td>Cifrado de contraseñas</td><td>Las contraseñas de usuario no deben almacenarse en texto plano en ningún caso.</td><td>Hash con bcrypt, factor de costo mínimo 12. Sin almacenamiento de contraseña en claro.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-07</code></td><td>Seguridad</td><td>Transporte cifrado</td><td>Toda comunicación entre clientes y servidor debe realizarse sobre conexiones cifradas.</td><td>HTTPS obligatorio en todos los endpoints. HTTP redirige a HTTPS. WebSocket sobre WSS.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-08</code></td><td>Seguridad</td><td>Gestión de tokens JWT</td><td>Los tokens de acceso deben tener vida corta. Los refresh tokens deben rotarse al usarse.</td><td>Access token: expiración ≤ 15 min. Refresh token: expiración ≤ 7 días con rotación.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-09</code></td><td>Seguridad</td><td>Autorización por rol</td><td>Los endpoints de la API deben verificar el rol del usuario autenticado antes de ejecutar cualquier acción.</td><td>Guards de NestJS aplicados a todos los controladores. Tests de acceso cruzado entre roles.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-10</code></td><td>Seguridad</td><td>Protección contra XSS</td><td>El sistema debe sanitizar todas las entradas de usuario antes de almacenarlas o renderizarlas.</td><td>Salida de datos de usuario siempre escapada. Sin innerHTML con datos sin sanitizar.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-11</code></td><td>Seguridad</td><td>Protección contra inyección SQL</td><td>No deben construirse queries SQL concatenando strings de entrada del usuario.</td><td>Todas las consultas a la base de datos a través de Prisma (queries parametrizadas). Cero SQL crudo con interpolación de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-12</code></td><td>Seguridad</td><td>Rate limiting</td><td>Los endpoints de autenticación y publicación deben limitar la cantidad de solicitudes por IP para prevenir ataques de fuerza bruta y spam.</td><td>Máximo 10 intentos de login por IP por minuto. Máximo 20 publicaciones de pedido por usuario por hora.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-13</code></td><td>Seguridad</td><td>Validación de archivos subidos</td><td>Los documentos subidos para verificación deben validarse en tipo y tamaño antes de almacenarse.</td><td>Tipos permitidos: PDF, JPG, PNG. Tamaño máximo: 5 MB por archivo.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Usabilidad</td></tr>
+<tr><td><code>RNF-14</code></td><td>Usabilidad</td><td>Diseño responsive web</td><td>La plataforma web debe funcionar correctamente en resoluciones de escritorio, tablet y móvil.</td><td>Sin scroll horizontal ni elementos superpuestos en viewports desde 375 px hasta 1920 px.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-15</code></td><td>Usabilidad</td><td>Compatibilidad de navegadores</td><td>La web debe funcionar correctamente en los navegadores de mayor uso.</td><td>Chrome, Firefox y Safari en sus dos últimas versiones principales. Edge en su última versión.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-16</code></td><td>Usabilidad</td><td>Mensajes de error comprensibles</td><td>Los mensajes de error del sistema deben ser claros para el usuario final, sin exponer detalles técnicos internos.</td><td>Ningún stack trace ni mensaje de base de datos visible en la interfaz de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-17</code></td><td>Usabilidad</td><td>Feedback de acciones</td><td>El sistema debe confirmar visualmente al usuario el resultado de cada acción relevante (publicar pedido, enviar propuesta, etc.).</td><td>Toda acción con efecto persistente muestra un mensaje de éxito o error en ≤ 1 s.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-18</code></td><td>Usabilidad</td><td>Accesibilidad básica</td><td>La interfaz web debe ser navegable con teclado y compatible con lectores de pantalla básicos.</td><td>Todos los formularios tienen labels asociados. Imágenes tienen texto alternativo. Contraste de color ≥ 4.5:1 (WCAG AA).</td><td><span class="b-hi lo">Baja</span></td></tr>
+
+<tr class="grp"><td colspan="6">Disponibilidad y confiabilidad</td></tr>
+<tr><td><code>RNF-19</code></td><td>Disponibilidad</td><td>Uptime del servicio</td><td>El sistema debe estar disponible la mayor parte del tiempo en horario de uso típico.</td><td>Disponibilidad ≥ 99 % mensual. Mantenimientos programados fuera del horario pico (00:00–06:00 ART).</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-20</code></td><td>Disponibilidad</td><td>Manejo de errores del servidor</td><td>Ante fallos internos, el sistema debe responder con códigos HTTP apropiados sin exponer información sensible.</td><td>Errores 5xx retornan JSON con mensaje genérico. Logging interno del error completo.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-21</code></td><td>Disponibilidad</td><td>Backups de la base de datos</td><td>Los datos de usuarios, pedidos y transacciones deben respaldarse periódicamente.</td><td>Backup automático diario del PostgreSQL administrado. Retención mínima de 7 días.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-22</code></td><td>Confiabilidad</td><td>Consistencia de datos</td><td>Las operaciones críticas (aceptar propuesta, cambiar estado de pedido) deben ser atómicas para evitar estados inconsistentes.</td><td>Uso de transacciones de base de datos en operaciones que modifican múltiples tablas.</td><td><span class="b-hi hi">Alta</span></td></tr>
+
+<tr class="grp"><td colspan="6">Escalabilidad y mantenibilidad</td></tr>
+<tr><td><code>RNF-23</code></td><td>Escalabilidad</td><td>Escalado horizontal del backend</td><td>El backend debe poder escalar agregando instancias sin cambios de arquitectura significativos.</td><td>El servidor NestJS no guarda estado en memoria entre requests. Sesiones en Redis (post-MVP).</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-24</code></td><td>Escalabilidad</td><td>Separación por módulos</td><td>La arquitectura del backend debe permitir modificar o reemplazar un módulo sin afectar a los demás.</td><td>Cada dominio (auth, pedidos, propuestas, chat, etc.) en su propio módulo NestJS con interfaces definidas.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-25</code></td><td>Mantenibilidad</td><td>Cobertura de tests</td><td>El código crítico del backend debe contar con tests automatizados para prevenir regresiones.</td><td>Cobertura mínima del 60 % en servicios de dominio. Tests de integración para los flujos principales.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-26</code></td><td>Mantenibilidad</td><td>Documentación de la API</td><td>La API REST debe estar documentada de forma que cualquier miembro del equipo pueda consumirla sin consultar el código fuente.</td><td>Swagger generado automáticamente con @nestjs/swagger. Disponible en /api/docs en entorno de desarrollo.</td><td><span class="b-hi mi">Media</span></td></tr>
+<tr><td><code>RNF-27</code></td><td>Mantenibilidad</td><td>Tipado estricto</td><td>El código TypeScript del proyecto debe ejecutarse sin errores de tipo en modo estricto.</td><td>strict: true en tsconfig. CI rechaza builds con errores de tipo.</td><td><span class="b-hi mi">Media</span></td></tr>
+
+<tr class="grp"><td colspan="6">Privacidad y datos personales</td></tr>
+<tr><td><code>RNF-28</code></td><td>Privacidad</td><td>Datos mínimos requeridos</td><td>El sistema solo debe solicitar los datos personales estrictamente necesarios para el funcionamiento de la plataforma.</td><td>Sin campos opcionales marcados como obligatorios. Sin recolección de datos de ubicación en tiempo real.</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-29</code></td><td>Privacidad</td><td>Acceso a datos propios</td><td>Cada usuario solo puede acceder y modificar su propia información personal.</td><td>Ningún endpoint expone datos de un usuario a otro sin relación activa (pedido compartido).</td><td><span class="b-hi hi">Alta</span></td></tr>
+<tr><td><code>RNF-30</code></td><td>Privacidad</td><td>Eliminación de cuenta</td><td>El usuario debe poder solicitar la eliminación de su cuenta y datos personales.</td><td>Funcionalidad de baja de cuenta disponible. Datos personales anonimizados o eliminados en un plazo razonable.</td><td><span class="b-hi lo">Baja</span></td></tr>
+
+</tbody>
+</table>
+</div><!-- /rnf -->
+
 <!-- ===== ARQUITECTURA ===== -->
 <div id="arq" class="section">
 <h2>Diagrama de arquitectura</h2>
@@ -887,6 +800,7 @@ gantt
 <div style="overflow-x:auto">
 <div style="min-width:700px;padding:8px 0">
 
+<!-- ACTORES -->
 <div style="display:flex;gap:12px;margin-bottom:16px">
 
   <!-- CLIENTE -->
@@ -946,13 +860,11 @@ gantt
 </div>
 
 <!-- FLECHA -->
-<div style="text-align:center;color:#94a3b8;font-size:13px;margin:2px 0;letter-spacing:1px">
-  ↓   REST / HTTPS   ·   WebSocket (WSS)   ·   Push Notifications   ↓
-</div>
+<div style="text-align:center;color:#94a3b8;font-size:20px;margin:2px 0 2px;letter-spacing:2px">↓ &nbsp; REST / HTTPS &nbsp; · &nbsp; WebSocket (WSS) &nbsp; · &nbsp; Push Notifications ↓</div>
 
 <!-- API GATEWAY -->
 <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:10px;padding:12px 16px;margin:10px 0;text-align:center">
-  <div style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">API Gateway · NestJS</div>
+  <div style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">API Gateway · NestJS</div>
   <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
     <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Auth Service</span>
     <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Order Service</span>
@@ -965,11 +877,9 @@ gantt
 </div>
 
 <!-- FLECHA -->
-<div style="text-align:center;color:#94a3b8;font-size:13px;margin:2px 0">
-  ↓   Prisma ORM · Queries parametrizadas   ↓
-</div>
+<div style="text-align:center;color:#94a3b8;font-size:20px;margin:2px 0 2px">↓ &nbsp; Prisma ORM &nbsp; · &nbsp; Queries parametrizadas ↓</div>
 
-<!-- CAPA DE DATOS -->
+<!-- DATOS -->
 <div style="display:flex;gap:12px;margin-top:10px">
   <div style="flex:2;background:#f5f3ff;border:1.5px solid #a78bfa;border-radius:10px;padding:12px 14px;text-align:center">
     <div style="font-size:11px;font-weight:700;color:#6d28d9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Base de datos principal</div>
@@ -988,14 +898,106 @@ gantt
   </div>
 </div>
 
-</div>
-</div>
+</div><!-- min-width -->
+</div><!-- overflow -->
+</div><!-- dbox -->
+
+<!-- VISTA DESPLIEGUE -->
+<div class="dbox">
+<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
+<div style="overflow-x:auto">
+<div style="min-width:700px;padding:8px 0">
+
+<div style="display:flex;gap:12px;align-items:stretch">
+
+  <!-- CLIENTE LADO -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
+
+    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
+      <div style="margin-top:6px;font-size:10.5px;background:#dbeafe;border-radius:4px;padding:3px 7px;display:inline-block;color:#1d4ed8">titowanobacoa.github.io → vercel.app</div>
+    </div>
+
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
+      <div style="margin-top:6px;font-size:10.5px;background:#bbf7d0;border-radius:4px;padding:3px 7px;display:inline-block;color:#15803d">APK distribución directa (MVP)</div>
+    </div>
+  </div>
+
+  <!-- FLECHAS CENTRO -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:#94a3b8;font-size:12px;min-width:90px;text-align:center">
+    <div style="font-size:18px">⟷</div>
+    <div>HTTPS</div>
+    <div style="margin-top:8px;font-size:18px">⟷</div>
+    <div>WSS</div>
+  </div>
+
+  <!-- BACKEND -->
+  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
+
+    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
+      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
+      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
+      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
+      </div>
+      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
+        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
+        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLECHAS DERECHA -->
+  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:#94a3b8;font-size:12px;min-width:70px;text-align:center">
+    <div style="font-size:18px">⟶</div>
+    <div>HTTP</div>
+  </div>
+
+  <!-- SERVICIOS EXTERNOS -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
+
+    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
+      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
+    </div>
+
+    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
+      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
+    </div>
+
+    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
+      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
+    </div>
+  </div>
+
+</div><!-- flex row -->
+
+<!-- LEYENDA PROTOCOLOS -->
+<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
+  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
+  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
+  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
+  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
 </div>
 
-
+</div><!-- min-width -->
+</div><!-- overflow -->
+</div><!-- dbox -->
 
 </div><!-- /arq -->
-
 
 </div><!-- /wrap -->
 
