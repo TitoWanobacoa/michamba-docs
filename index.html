@@ -1,1103 +1,360 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documentación Técnica — Mi Chamba</title>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mi Chamba | Tu solución está a un clic</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#a3faef",
+                      "surface-tint": "#006a63",
+                      "on-tertiary-container": "#ffe5db",
+                      "outline": "#6e7977",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#00201e",
+                      "inverse-on-surface": "#eef1f0",
+                      "secondary-container": "#b2eee8",
+                      "surface-dim": "#d7dbd9",
+                      "on-surface": "#181c1c",
+                      "secondary-fixed": "#b2eee8",
+                      "tertiary": "#7f4025",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#ebefed",
+                      "tertiary-container": "#9c573a",
+                      "surface": "#f7faf8",
+                      "on-surface-variant": "#3e4947",
+                      "outline-variant": "#bdc9c6",
+                      "on-error-container": "#93000a",
+                      "secondary": "#2d6763",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#f7faf8",
+                      "on-primary-fixed": "#00201d",
+                      "surface-container-highest": "#e0e3e1",
+                      "primary": "#005c55",
+                      "inverse-surface": "#2d3130",
+                      "primary-fixed": "#9cf2e8",
+                      "surface-container-high": "#e5e9e7",
+                      "on-primary-fixed-variant": "#00504a",
+                      "on-tertiary-fixed": "#370e00",
+                      "primary-container": "#0f766e",
+                      "on-background": "#181c1c",
+                      "tertiary-fixed-dim": "#ffb598",
+                      "surface-container-low": "#f1f4f3",
+                      "surface-variant": "#e0e3e1",
+                      "primary-fixed-dim": "#80d5cb",
+                      "on-secondary-container": "#346e69",
+                      "background": "#f7faf8",
+                      "on-secondary-fixed-variant": "#0e4f4b",
+                      "tertiary-fixed": "#ffdbce",
+                      "error-container": "#ffdad6",
+                      "inverse-primary": "#80d5cb",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#97d1cc",
+                      "on-tertiary-fixed-variant": "#72361b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "4px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "gutter": "24px",
+                      "xl": "48px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-xl": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.6;background:#f8fafc;color:#1e293b}
-.header{background:linear-gradient(135deg,#0f766e,#0369a1);color:#fff;padding:22px 28px}
-.header h1{font-size:20px;font-weight:600;letter-spacing:-.3px}
-.header p{opacity:.8;font-size:13px;margin-top:3px}
-.tabs-bar{background:#fff;border-bottom:1px solid #e2e8f0;overflow-x:auto;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.tabs{display:flex;padding:0 20px;min-width:max-content}
-.tab{padding:11px 14px;border:none;background:none;cursor:pointer;font-size:13px;font-weight:400;color:#64748b;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
-.tab:hover{color:#1e293b}
-.tab.active{color:#0f766e;font-weight:500;border-bottom-color:#0f766e}
-.wrap{padding:24px 28px;max-width:1100px;margin:0 auto}
-.section{display:none}.section.active{display:block}
-h2{font-size:17px;font-weight:600;margin-bottom:4px;color:#1e293b}
-.sub{font-size:13px;color:#64748b;margin-bottom:18px;line-height:1.5}
-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px;background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden}
-th{padding:9px 13px;text-align:left;font-weight:600;font-size:11.5px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;background:#f8fafc;border-bottom:1px solid #e2e8f0}
-td{padding:9px 13px;border-bottom:1px solid #f1f5f9;vertical-align:top;font-size:13px}
-tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:#f8fafc}
-.grp td{background:#f1f5f9!important;font-weight:600;font-size:12px;color:#475569;padding:6px 13px;border-top:1px solid #e2e8f0}
-code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;border-radius:3px;font-size:12px;color:#0f766e}
-.b-hi{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600}
-.hi{background:#fee2e2;color:#b91c1c}.mi{background:#fef3c7;color:#b45309}.lo{background:#dcfce7;color:#15803d}
-.pen{background:#f1f5f9;color:#64748b}.pass{background:#dcfce7;color:#15803d}.fail{background:#fee2e2;color:#b91c1c}
-.note{padding:11px 15px;border-radius:6px;font-size:13px;margin-bottom:14px;line-height:1.5}
-.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
-.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
-.dbox{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:18px 20px;margin-bottom:18px;overflow-x:auto}
-.dlabel{font-size:12px;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f1f5f9}
-.mermaid svg{max-width:100%;height:auto}
-</style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+        }
+    </style>
 </head>
-<body>
-<div class="header">
-  <h1>Documentación Técnica — Mi Chamba</h1>
-  <p>Plataforma de conexión entre clientes y especialistas · Buenos Aires, Argentina</p>
-</div>
-
-<div class="tabs-bar">
-  <div class="tabs">
-    <button class="tab active" onclick="show('rf-web',this)">RF Web</button>
-    <button class="tab" onclick="show('rf-apk',this)">RF Android</button>
-    <button class="tab" onclick="show('test',this)">Casos de prueba</button>
-    <button class="tab" onclick="show('uc',this)">Casos de uso</button>
-    <button class="tab" onclick="show('cls',this)">Clases UML</button>
-    <button class="tab" onclick="show('seq',this)">Secuencia</button>
-    <button class="tab" onclick="show('der',this)">DER</button>
-    <button class="tab" onclick="show('comp',this)">Componentes</button>
-    <button class="tab" onclick="show('gantt',this)">Gantt</button>
-    <button class="tab" onclick="show('rnf',this)">RNF</button>
-    <button class="tab" onclick="show('arq',this)">Arquitectura</button>
-  </div>
-</div>
-
-<div class="wrap">
-
-<!-- ===== RF WEB ===== -->
-<div id="rf-web" class="section active">
-<h2>Requisitos funcionales — plataforma web</h2>
-<p class="sub">Funcionalidades que debe implementar la versión web de Mi Chamba, organizadas por módulo y actor.</p>
-<table>
-<thead><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Actor</th><th>Prioridad</th></tr></thead>
-<tbody>
-<tr class="grp"><td colspan="5">Autenticación y perfil</td></tr>
-<tr><td><code>RF-W01</code></td><td>Registro de usuario</td><td>Registro como cliente o especialista con nombre, email, contraseña y barrio. Selección de rol obligatoria.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W02</code></td><td>Inicio de sesión</td><td>Autenticación con email y contraseña. Sesión persistente mediante token JWT. Manejo de sesiones inválidas.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W03</code></td><td>Cierre de sesión</td><td>El usuario puede cerrar sesión desde cualquier pantalla. El token se invalida en el servidor.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W04</code></td><td>Edición de perfil básico</td><td>Edición de nombre, teléfono, barrio y contraseña desde el perfil del usuario.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W05</code></td><td>Perfil profesional del especialista</td><td>El especialista puede completar descripción, experiencia, servicios ofrecidos y precio base por hora.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W06</code></td><td>Solicitud de verificación</td><td>El especialista puede subir documentos de identidad y credenciales para solicitar la verificación al administrador.</td><td>Especialista</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr class="grp"><td colspan="5">Pedidos (cliente)</td></tr>
-<tr><td><code>RF-W07</code></td><td>Publicación de pedido</td><td>El cliente publica un pedido indicando categoría (obligatorio), descripción, costo aproximado y barrio (opcional).</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W08</code></td><td>Ver pedidos propios</td><td>El cliente puede ver su listado de pedidos con estado actual (abierto, en progreso, finalizado, cancelado).</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W09</code></td><td>Detalle de pedido</td><td>Vista detallada de un pedido: descripción, estado, propuestas recibidas y chat asociado (si aplica).</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W10</code></td><td>Historial de pedidos</td><td>Sección con todos los pedidos pasados del cliente (finalizados y cancelados), accesible desde su perfil.</td><td>Cliente</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RF-W11</code></td><td>Cancelar pedido</td><td>El cliente puede cancelar un pedido en estado "abierto". No se puede cancelar si ya hay propuesta aceptada.</td><td>Cliente</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr class="grp"><td colspan="5">Propuestas (cliente)</td></tr>
-<tr><td><code>RF-W12</code></td><td>Ver propuestas recibidas</td><td>El cliente ve todas las propuestas de un pedido con el perfil, precio y descripción del especialista.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W13</code></td><td>Ver perfil del especialista</td><td>Acceso al perfil completo del especialista: experiencia, servicios, rating promedio y reseñas de trabajos anteriores.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W14</code></td><td>Aceptar propuesta</td><td>El cliente acepta una propuesta. El pedido pasa a "en progreso", el chat se habilita y el especialista es notificado.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W15</code></td><td>Rechazar propuesta</td><td>El cliente puede rechazar propuestas individuales. El pedido sigue abierto para otros especialistas.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr class="grp"><td colspan="5">Feed y propuestas (especialista)</td></tr>
-<tr><td><code>RF-W16</code></td><td>Feed de pedidos disponibles</td><td>El especialista ve un feed de pedidos activos filtrables por categoría, barrio y costo aproximado.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W17</code></td><td>Detalle de pedido disponible</td><td>El especialista puede ver el detalle completo de un pedido antes de enviar una propuesta.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W18</code></td><td>Envío de propuesta</td><td>El especialista envía una propuesta a un pedido indicando precio oferta y descripción del trabajo propuesto.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W19</code></td><td>Historial de trabajos</td><td>El especialista puede ver el historial de pedidos en los que participó con resultado de cada propuesta.</td><td>Especialista</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr class="grp"><td colspan="5">Comunicación y reseñas</td></tr>
-<tr><td><code>RF-W20</code></td><td>Chat entre cliente y especialista</td><td>Mensajería de texto en tiempo real habilitada automáticamente al aceptar una propuesta.</td><td>Ambos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W21</code></td><td>Notificación de nueva propuesta</td><td>El cliente recibe notificación in-app cuando un especialista envía propuesta a su pedido.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W22</code></td><td>Notificación de propuesta aceptada</td><td>El especialista recibe notificación in-app cuando el cliente acepta su propuesta.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W23</code></td><td>Notificación de nuevo pedido</td><td>Los especialistas reciben notificación cuando se publica un pedido en su categoría de servicio.</td><td>Especialista</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RF-W24</code></td><td>Reseña al especialista</td><td>Al finalizar el trabajo, el cliente puede dejar reseña con calificación (1–5 estrellas) y comentario. Una sola reseña por pedido.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W25</code></td><td>Reseña al cliente</td><td>Al finalizar el trabajo, el especialista puede dejar reseña del cliente. Una sola reseña por pedido.</td><td>Especialista</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RF-W26</code></td><td>Reclamo</td><td>El cliente puede abrir un reclamo si hay incumplimiento. El administrador gestiona y resuelve los reclamos.</td><td>Cliente/Admin</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr class="grp"><td colspan="5">Panel de administración</td></tr>
-<tr><td><code>RF-W27</code></td><td>Gestión de usuarios</td><td>El admin puede ver el listado completo de usuarios, ver detalles y bloquear cuentas por infracciones.</td><td>Admin</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W28</code></td><td>Verificación de especialistas</td><td>El admin revisa las solicitudes de verificación y aprueba o rechaza con base en los documentos presentados.</td><td>Admin</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W29</code></td><td>Gestión de reclamos</td><td>El admin ve los reclamos abiertos, puede investigar y marcarlos como resueltos con una resolución documentada.</td><td>Admin</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-W30</code></td><td>Reportes básicos</td><td>Dashboard con métricas básicas: total de pedidos, usuarios registrados por tipo, propuestas aceptadas y reclamos pendientes.</td><td>Admin</td><td><span class="b-hi mi">Media</span></td></tr>
-</tbody>
-</table>
-</div>
-
-<!-- ===== RF APK ===== -->
-<div id="rf-apk" class="section">
-<h2>Requisitos funcionales — aplicación Android (MVP)</h2>
-<p class="sub">El MVP para Android cubre las funcionalidades esenciales del flujo cliente-especialista. El panel de administración y la gestión de verificación están disponibles solo en la versión web.</p>
-<div class="note info">El MVP Android se valida en Android (no incluye iOS en esta etapa). La edición avanzada del perfil profesional del especialista queda disponible únicamente en web.</div>
-<table>
-<thead><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Actor</th><th>Prioridad</th></tr></thead>
-<tbody>
-<tr class="grp"><td colspan="5">Autenticación y perfil</td></tr>
-<tr><td><code>RF-A01</code></td><td>Registro e inicio de sesión</td><td>El usuario puede registrarse y autenticarse desde la app con email y contraseña. Selección de rol al registrarse.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A02</code></td><td>Cierre de sesión</td><td>El usuario puede cerrar sesión desde la configuración de la app. El token se invalida en el servidor.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A03</code></td><td>Ver y editar perfil básico</td><td>El usuario puede ver y editar nombre y teléfono. La edición completa del perfil profesional se realiza en la web.</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr class="grp"><td colspan="5">Pedidos</td></tr>
-<tr><td><code>RF-A04</code></td><td>Publicar pedido</td><td>El cliente puede publicar un pedido con categoría, descripción y costo aproximado desde la app.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A05</code></td><td>Ver pedidos propios</td><td>El cliente puede ver sus pedidos activos con estado actual y acceder al detalle de cada uno.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A06</code></td><td>Feed de pedidos disponibles</td><td>El especialista ve un feed de pedidos activos en su categoría, con opción de filtrar por barrio.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr class="grp"><td colspan="5">Propuestas</td></tr>
-<tr><td><code>RF-A07</code></td><td>Enviar propuesta</td><td>El especialista puede enviar una propuesta a un pedido disponible con precio y descripción desde la app.</td><td>Especialista</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A08</code></td><td>Ver propuestas recibidas</td><td>El cliente ve las propuestas recibidas con datos básicos del especialista (nombre, rating, precio propuesto).</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A09</code></td><td>Aceptar o rechazar propuesta</td><td>El cliente puede aceptar o rechazar propuestas desde la app. La aceptación habilita el chat automáticamente.</td><td>Cliente</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr class="grp"><td colspan="5">Comunicación y notificaciones</td></tr>
-<tr><td><code>RF-A10</code></td><td>Chat de texto</td><td>Cliente y especialista pueden intercambiar mensajes de texto en tiempo real una vez aceptada la propuesta.</td><td>Ambos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RF-A11</code></td><td>Notificaciones push</td><td>La app envía notificaciones push para: nuevas propuestas, aceptación de propuesta, nuevos mensajes en el chat y nuevos pedidos (para especialistas).</td><td>Todos</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr class="grp"><td colspan="5">Reseñas e historial</td></tr>
-<tr><td><code>RF-A12</code></td><td>Dejar reseña</td><td>Al finalizar el trabajo, el cliente puede dejar una reseña con calificación (1–5) y comentario desde la app.</td><td>Cliente</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RF-A13</code></td><td>Ver historial</td><td>El usuario puede ver un historial básico de sus pedidos y trabajos pasados desde la app.</td><td>Todos</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RF-A14</code></td><td>Configuración básica</td><td>El usuario puede configurar preferencias de notificaciones push y ver datos de su cuenta.</td><td>Todos</td><td><span class="b-hi lo">Baja</span></td></tr>
-</tbody>
-</table>
-</div>
-
-<!-- ===== TEST CASES ===== -->
-<div id="test" class="section">
-<h2>Casos de prueba</h2>
-<p class="sub">Plan de pruebas funcionales, de integración y de seguridad. Estado inicial: Pendiente. Se actualiza durante la ejecución del ciclo de QA.</p>
-<table>
-<thead><tr><th>ID</th><th>Módulo / caso</th><th>Precondición</th><th>Pasos</th><th>Resultado esperado</th><th>Estado</th></tr></thead>
-<tbody>
-<tr class="grp"><td colspan="6">Autenticación</td></tr>
-<tr><td><code>TC-01</code></td><td>Registro exitoso como cliente</td><td>No existe cuenta con el email a usar.</td><td>Completar formulario con datos válidos y rol "cliente". Enviar.</td><td>Cuenta creada. Redirección al dashboard de cliente.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-02</code></td><td>Registro exitoso como especialista</td><td>No existe cuenta con el email a usar.</td><td>Completar formulario con datos válidos y rol "especialista". Enviar.</td><td>Cuenta creada. Redirección al dashboard de especialista.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-03</code></td><td>Registro con email duplicado</td><td>Existe una cuenta con el email ingresado.</td><td>Intentar registrarse con el mismo email.</td><td>Error: "Este email ya está registrado". Formulario no se envía.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-04</code></td><td>Registro con campos vacíos</td><td>Ninguna.</td><td>Intentar registrarse sin completar nombre, email o contraseña.</td><td>Validación en campos requeridos. El formulario no se envía.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-05</code></td><td>Login exitoso</td><td>Usuario con cuenta activa.</td><td>Ingresar email y contraseña correctos. Confirmar.</td><td>Redirección al dashboard según el rol del usuario.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-06</code></td><td>Login con credenciales incorrectas</td><td>Usuario con cuenta activa.</td><td>Ingresar contraseña incorrecta.</td><td>Mensaje de error genérico sin revelar si el email existe.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-07</code></td><td>Cierre de sesión</td><td>Usuario con sesión activa.</td><td>Hacer clic en "Cerrar sesión".</td><td>Token invalidado. Redirección al landing. Rutas protegidas inaccesibles.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Pedidos</td></tr>
-<tr><td><code>TC-08</code></td><td>Publicar pedido con datos completos</td><td>Usuario cliente con sesión activa.</td><td>Completar formulario con categoría, descripción y costo. Publicar.</td><td>Pedido aparece en el feed de especialistas y en el historial del cliente como "abierto".</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-09</code></td><td>Publicar pedido sin descripción</td><td>Usuario cliente con sesión activa.</td><td>Intentar publicar sin completar el campo de descripción.</td><td>Validación en el campo descripción. El formulario no se envía.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-10</code></td><td>Filtrar pedidos por categoría</td><td>Especialista logueado. Pedidos de distintas categorías existen en el sistema.</td><td>Seleccionar una categoría en el filtro del feed.</td><td>Solo se muestran pedidos de la categoría seleccionada.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-11</code></td><td>Filtrar pedidos por barrio</td><td>Especialista logueado. Pedidos de distintos barrios existen en el sistema.</td><td>Ingresar un barrio en el filtro de búsqueda.</td><td>Solo se muestran pedidos del barrio ingresado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-12</code></td><td>Cancelar pedido abierto</td><td>Cliente con pedido en estado "abierto".</td><td>Seleccionar el pedido y hacer clic en "Cancelar".</td><td>Pedido pasa a estado "cancelado". Desaparece del feed de especialistas.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Propuestas</td></tr>
-<tr><td><code>TC-13</code></td><td>Enviar propuesta válida</td><td>Especialista logueado. Existe pedido abierto en su categoría.</td><td>Completar precio y descripción de propuesta. Enviar.</td><td>Propuesta aparece en el pedido. Cliente recibe notificación.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-14</code></td><td>Propuesta duplicada al mismo pedido</td><td>El especialista ya envió una propuesta al mismo pedido.</td><td>Intentar enviar otra propuesta al mismo pedido.</td><td>El sistema rechaza la solicitud con mensaje de error apropiado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-15</code></td><td>Aceptar propuesta</td><td>Cliente con al menos una propuesta recibida.</td><td>Seleccionar propuesta y hacer clic en "Aceptar".</td><td>Pedido pasa a "en progreso". Chat habilitado. Especialista notificado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-16</code></td><td>Pedido cerrado a nuevas propuestas</td><td>Pedido con propuesta aceptada.</td><td>Intentar enviar propuesta al pedido desde otro especialista.</td><td>El sistema no permite enviar propuesta a un pedido "en progreso".</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-17</code></td><td>Rechazar propuesta</td><td>Cliente con al menos una propuesta recibida.</td><td>Seleccionar propuesta y hacer clic en "Rechazar".</td><td>Propuesta pasa a "rechazada". El pedido sigue abierto para otros especialistas.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Chat</td></tr>
-<tr><td><code>TC-18</code></td><td>Enviar mensaje de texto</td><td>Propuesta aceptada. Chat habilitado.</td><td>Ingresar texto en el campo de mensaje. Enviar.</td><td>Mensaje visible para ambas partes en tiempo real.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-19</code></td><td>Ver historial de mensajes</td><td>Chat con mensajes previos.</td><td>Abrir el chat de un pedido activo.</td><td>Se muestran todos los mensajes anteriores en orden cronológico.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-20</code></td><td>Acceso no autorizado al chat</td><td>Usuario ajeno al pedido con sesión activa.</td><td>Intentar acceder a la URL del chat de otro usuario.</td><td>El sistema devuelve 403. El chat no se muestra.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Reseñas y calificaciones</td></tr>
-<tr><td><code>TC-21</code></td><td>Dejar reseña tras trabajo finalizado</td><td>Pedido en estado "finalizado".</td><td>El cliente accede al pedido finalizado y envía reseña con calificación y comentario.</td><td>Reseña visible en el perfil del especialista. Rating promedio actualizado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-22</code></td><td>Reseña sobre pedido no finalizado</td><td>Pedido en estado "en progreso".</td><td>Intentar acceder a la opción de reseña en un pedido activo.</td><td>La opción de reseña no está disponible hasta que el pedido se marque como finalizado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-23</code></td><td>Reseña duplicada por el mismo usuario</td><td>El cliente ya dejó una reseña para ese pedido.</td><td>Intentar enviar una segunda reseña para el mismo pedido.</td><td>El sistema no permite más de una reseña por pedido por usuario.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Panel de administración</td></tr>
-<tr><td><code>TC-24</code></td><td>Bloquear usuario</td><td>Admin logueado. Existe usuario activo.</td><td>Buscar usuario en el panel y hacer clic en "Bloquear".</td><td>Usuario bloqueado. No puede iniciar sesión. Sesión activa invalidada.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-25</code></td><td>Aprobar verificación de especialista</td><td>Especialista solicitó verificación con documentos adjuntos.</td><td>Admin revisa documentos y aprueba la verificación.</td><td>Perfil del especialista muestra sello de verificado. Especialista notificado.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-26</code></td><td>Resolver reclamo</td><td>Existe un reclamo en estado "abierto".</td><td>Admin revisa el reclamo, toma decisión y lo marca como resuelto.</td><td>Reclamo pasa a "resuelto". Ambas partes son notificadas.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-27</code></td><td>Ver reporte de actividad</td><td>Admin logueado. Datos existentes en el sistema.</td><td>Acceder a la sección de reportes del panel admin.</td><td>Se muestran métricas básicas: pedidos totales, usuarios activos, propuestas aceptadas.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr class="grp"><td colspan="6">Seguridad</td></tr>
-<tr><td><code>TC-28</code></td><td>Acceso a ruta protegida sin sesión</td><td>Usuario sin sesión activa.</td><td>Intentar acceder directamente a una URL protegida.</td><td>Redirección al login. API devuelve 401.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-29</code></td><td>Acceso a recurso de otro usuario</td><td>Dos usuarios con sesión activa.</td><td>Usuario A intenta acceder a pedidos o chats de Usuario B manipulando la URL.</td><td>Sistema devuelve 403. Datos de Usuario B no se exponen.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-30</code></td><td>Intento de XSS en campos de texto</td><td>Ninguna.</td><td>Ingresar <code>&lt;script&gt;alert(1)&lt;/script&gt;</code> en descripción o comentario.</td><td>Contenido renderizado como texto plano. No se ejecuta JavaScript.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-31</code></td><td>Acceso al panel admin por no-admin</td><td>Usuario logueado como cliente o especialista.</td><td>Intentar acceder a rutas del panel de administración.</td><td>Sistema devuelve 403. Las rutas admin están protegidas por verificación de rol.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-<tr><td><code>TC-32</code></td><td>Prueba multiplataforma web</td><td>Plataforma web desplegada.</td><td>Acceder desde Chrome, Firefox y Safari en desktop y mobile.</td><td>La interfaz se visualiza correctamente en todos los navegadores probados.</td><td><span class="b-hi pen">Pendiente</span></td></tr>
-</tbody>
-</table>
-</div>
-
-<!-- ===== USE CASES ===== -->
-<div id="uc" class="section">
-<h2>Diagramas de casos de uso — corregidos y completados</h2>
-<p class="sub">Revisión integral de los diagramas originales del proyecto con correcciones y el diagrama faltante del administrador.</p>
-<div class="note warn"><strong>Correcciones aplicadas:</strong> (1) Los dos diagramas de cliente solapados (págs. 26 y 27) se unifican en uno solo. (2) Se agrega el diagrama de administrador, ausente en los originales. (3) El diagrama de "Pagos del Especialista" (pág. 30) queda eliminado: los pagos en línea están explícitamente fuera del alcance del MVP. (4) Se agrega "Ver historial de pedidos" al caso de uso de cliente (presente en el Mind Map pero omitido en los diagramas). (5) Se corrigen relaciones include/extend inconsistentes entre casos.</div>
-
-<div class="dbox"><div class="dlabel">Caso de uso — cliente (diagrama unificado y corregido)</div>
-<div class="mermaid">
-flowchart LR
-    CLI(["Cliente"])
-    subgraph SIS["Sistema Mi Chamba"]
-        direction TB
-        UC1["Registrarse"]
-        UC2["Iniciar / cerrar sesión"]
-        UC3["Editar perfil"]
-        UC4["Publicar pedido"]
-        UC4a["Elegir categoría"]
-        UC5["Ver propuestas recibidas"]
-        UC5a["Ver perfil del especialista"]
-        UC6["Aceptar propuesta"]
-        UC7["Rechazar propuesta"]
-        UC8["Chatear con especialista"]
-        UC9["Dejar reseña al especialista"]
-        UC10["Ver historial de pedidos"]
-        UC11["Hacer reclamo"]
-        UC12["Ver notificaciones"]
-        UC4 -. include .-> UC4a
-        UC5 -. extend .-> UC5a
-        UC6 -. extend .-> UC8
-    end
-    CLI --> UC1 & UC2 & UC3 & UC4 & UC5 & UC6 & UC7 & UC9 & UC10 & UC11 & UC12
+<body class="bg-surface font-body-md text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim docked full-width top-0 sticky z-50 shadow-sm">
+<nav class="flex justify-between items-center h-16 px-gutter max-w-container-max mx-auto">
+<div class="flex items-center gap-md">
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Mi Chamba</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Tu solución está a un clic</span>
 </div>
 </div>
-
-<div class="dbox"><div class="dlabel">Caso de uso — especialista</div>
-<div class="mermaid">
-flowchart LR
-    ESP(["Especialista"])
-    subgraph SIS2["Sistema Mi Chamba"]
-        direction TB
-        E1["Registrarse"]
-        E2["Iniciar / cerrar sesión"]
-        E3["Editar perfil"]
-        E4["Gestionar perfil profesional"]
-        E5["Ver feed de pedidos"]
-        E5a["Filtrar por categoría / barrio / costo"]
-        E6["Ver detalle de pedido"]
-        E7["Enviar propuesta"]
-        E8["Chatear con cliente"]
-        E9["Dejar reseña al cliente"]
-        E10["Ver historial de trabajos"]
-        E11["Ver notificaciones"]
-        E12["Solicitar verificación de identidad"]
-        E5 -. include .-> E5a
-        E7 -. extend .-> E8
-        E4 -. extend .-> E12
-    end
-    ESP --> E1 & E2 & E3 & E4 & E5 & E6 & E7 & E9 & E10 & E11
+<div class="hidden md:flex items-center gap-lg">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Servicios</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Especialistas</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Cómo funciona</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">FAQ</a>
 </div>
+<div class="flex items-center gap-md"><button class="hidden lg:block text-primary font-label-md hover:underline transition-all">Entrar como especialista</button>
+<button class="bg-primary-container text-on-primary px-lg py-sm rounded-lg font-label-md hover:bg-primary transition-colors">Registrate</button>
+<button class="text-on-surface-variant font-label-md hover:text-primary transition-colors">Iniciá sesión</button></div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Professional craftsman working" class="w-full h-full object-cover" src="https://img.magnific.com/vector-premium/grupo-personas-diferentes-trabajos-ocupaciones-diseno-vectores-caracteres-dia-laboral_48866-1521.jpg"/>
+<div class="absolute inset-0 bg-black/60"></div>
 </div>
-
-<div class="dbox"><div class="dlabel">Caso de uso — administrador (diagrama nuevo, ausente en la entrega original)</div>
-<div class="mermaid">
-flowchart LR
-    ADM(["Administrador"])
-    subgraph SIS3["Panel de Administración — Mi Chamba"]
-        direction TB
-        A1["Iniciar sesión"]
-        A2["Ver dashboard general"]
-        A3["Ver listado de usuarios"]
-        A4["Bloquear usuario"]
-        A5["Ver solicitudes de verificación"]
-        A6["Aprobar verificación"]
-        A7["Rechazar verificación"]
-        A8["Ver reclamos pendientes"]
-        A9["Resolver reclamo"]
-        A10["Ver reportes básicos"]
-        A3 -. extend .-> A4
-        A5 -. extend .-> A6
-        A5 -. extend .-> A7
-        A8 -. extend .-> A9
-    end
-    ADM --> A1 & A2 & A3 & A5 & A8 & A10
+<div class="relative z-10 max-w-container-max mx-auto px-gutter text-center">
+<h1 class="font-headline-xl text-headline-xl text-white mb-md">Resolvé tu problema en minutos</h1>
+<p class="font-body-lg text-body-lg text-white/90 max-w-2xl mx-auto mb-xl">Escribí tu problema, recibí propuestas y elegí con quién trabajar</p>
+<div class="max-w-3xl mx-auto bg-white p-sm rounded-xl shadow-lg flex flex-col md:flex-row gap-sm">
+<div class="flex-1 relative flex items-center">
+<span class="material-symbols-outlined absolute left-md text-outline">search</span>
+<input class="w-full pl-xl pr-md py-md border-none focus:ring-0 text-on-surface placeholder:text-outline-variant" placeholder="¿Qué servicio necesitás?" type="text"/>
+</div>
+<button class="bg-primary text-white px-xl py-md rounded-lg font-headline-md hover:bg-secondary transition-all">Buscar</button>
+</div>
+<p class="mt-md text-white/80 font-label-md">Podés enviar un pedido sin registrarte</p>
+</div>
+</section>
+<!-- Beneficios -->
+<section class="relative z-10 py-xl bg-white">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30 text-center">
+<div class="bg-secondary-container w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="chat">chat</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Los especialistas te escriben</h3>
+<p class="text-on-surface-variant text-body-md">Recibí propuestas personalizadas en tiempo real sin tener que buscar uno por uno.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30 text-center">
+<div class="bg-secondary-container w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Mejor precio para vos</h3>
+<p class="text-on-surface-variant text-body-md">Compará diferentes presupuestos y elegí la opción que mejor se adapte a tu bolsillo.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30 text-center">
+<div class="bg-secondary-container w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Especialistas verificados</h3>
+<p class="text-on-surface-variant text-body-md">Validamos la identidad y antecedentes de cada profesional para tu total tranquilidad.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-lg rounded-xl shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30 text-center">
+<div class="bg-secondary-container w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-md">
+<span class="material-symbols-outlined text-primary" data-icon="stars">stars</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Opiniones reales</h3>
+<p class="text-on-surface-variant text-body-md">Leé las reseñas de otros usuarios y contratá basado en experiencias reales de la comunidad.</p>
 </div>
 </div>
 </div>
-
-<!-- ===== CLASS DIAGRAM ===== -->
-<div id="cls" class="section">
-<h2>Diagrama de clases</h2>
-<p class="sub">Modelado de las entidades principales del sistema con sus atributos, métodos y relaciones.</p>
-<div class="dbox">
-<div class="mermaid">
-classDiagram
-    class Usuario {
-        +int id
-        +String nombre
-        +String apellido
-        +String email
-        +String passwordHash
-        +String telefono
-        +String barrio
-        +String rol
-        +Boolean verificado
-        +Boolean activo
-        +DateTime createdAt
-        +login() Boolean
-        +logout() void
-        +editarPerfil() void
-    }
-    class Cliente {
-        +publicarPedido() Pedido
-        +verPropuestas() List
-        +aceptarPropuesta(id) void
-        +rechazarPropuesta(id) void
-        +dejarResena(pedidoId) void
-        +hacerReclamo(pedidoId) void
-    }
-    class Especialista {
-        +Float ratingPromedio
-        +Boolean docVerificado
-        +verFeedPedidos() List
-        +filtrarPedidos() List
-        +enviarPropuesta() Propuesta
-        +dejarResena(pedidoId) void
-        +solicitarVerificacion() void
-    }
-    class Administrador {
-        +gestionarUsuarios() void
-        +verificarEspecialista(id) void
-        +gestionarReclamos() void
-        +verReportes() Object
-    }
-    class Pedido {
-        +int id
-        +int clienteId
-        +int categoriaId
-        +String descripcion
-        +Float costoAproximado
-        +String barrio
-        +String estado
-        +DateTime createdAt
-        +DateTime updatedAt
-        +cambiarEstado(estado) void
-        +cancelar() void
-    }
-    class Propuesta {
-        +int id
-        +int pedidoId
-        +int especialistaId
-        +String descripcion
-        +Float precioOferta
-        +String estado
-        +DateTime createdAt
-        +aceptar() void
-        +rechazar() void
-    }
-    class Chat {
-        +int id
-        +int pedidoId
-        +DateTime createdAt
-        +enviarMensaje(texto) Mensaje
-        +obtenerMensajes() List
-    }
-    class Mensaje {
-        +int id
-        +int chatId
-        +int remitenteId
-        +String contenido
-        +Boolean leido
-        +DateTime createdAt
-        +marcarLeido() void
-    }
-    class Resena {
-        +int id
-        +int pedidoId
-        +int autorId
-        +int destinatarioId
-        +int calificacion
-        +String comentario
-        +DateTime createdAt
-    }
-    class Categoria {
-        +int id
-        +String nombre
-        +String descripcion
-        +String icono
-    }
-    class Notificacion {
-        +int id
-        +int usuarioId
-        +String tipo
-        +String contenido
-        +Boolean leido
-        +DateTime createdAt
-        +marcarLeida() void
-    }
-    class Reclamo {
-        +int id
-        +int pedidoId
-        +int clienteId
-        +String descripcion
-        +String estado
-        +DateTime createdAt
-        +resolver() void
-    }
-
-    Usuario <|-- Cliente
-    Usuario <|-- Especialista
-    Usuario <|-- Administrador
-    Cliente "1" --> "0..*" Pedido : publica
-    Especialista "1" --> "0..*" Propuesta : envía
-    Pedido "1" --> "0..*" Propuesta : recibe
-    Pedido "1" --> "0..1" Chat : tiene
-    Chat "1" --> "0..*" Mensaje : contiene
-    Pedido "1" --> "0..*" Resena : origina
-    Pedido "0..*" --> "1" Categoria : pertenece
-    Usuario "1" --> "0..*" Notificacion : recibe
-    Pedido "1" --> "0..*" Reclamo : puede tener
+</section>
+<!-- Cómo Funciona -->
+<section class="py-xl bg-surface-container-low">
+<div class="max-w-container-max mx-auto px-gutter">
+<h2 class="font-headline-lg text-headline-lg text-center mb-xl text-on-surface">¿Cómo funciona Mi Chamba?</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl relative">
+<!-- Step 1 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white font-headline-md mb-md z-10 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" data-icon="post_add">post_add</span>
+</div>
+<div class="absolute top-8 left-1/2 w-full h-0.5 bg-outline-variant hidden md:block -z-0"></div>
+<h4 class="font-headline-md text-headline-md mb-sm">1. Publicá tu pedido</h4>
+<p class="text-on-surface-variant text-body-md px-md">Describí lo que necesitás y recibí propuestas en minutos de especialistas interesados.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white font-headline-md mb-md z-10 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+</div>
+<div class="absolute top-8 left-1/2 w-full h-0.5 bg-outline-variant hidden md:block -z-0"></div>
+<h4 class="font-headline-md text-headline-md mb-sm">2. Elegí al especialista</h4>
+<p class="text-on-surface-variant text-body-md px-md">Compará precios, leé reseñas de trabajos anteriores y elegí con quién querés trabajar.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative flex flex-col items-center text-center group">
+<div class="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white font-headline-md mb-md z-10 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-sm">3. Listo</h4>
+<p class="text-on-surface-variant text-body-md px-md">Coordiná los detalles por chat, realizá el trabajo y calificá el servicio al finalizar.</p>
 </div>
 </div>
 </div>
-
-<!-- ===== SEQUENCE ===== -->
-<div id="seq" class="section">
-<h2>Diagramas de secuencia</h2>
-<p class="sub">Flujos principales del sistema: publicación de pedido, aceptación de propuesta y mensajería en tiempo real.</p>
-
-<div class="dbox"><div class="dlabel">Secuencia 1 — publicar pedido</div>
-<div class="mermaid">
-sequenceDiagram
-    actor C as Cliente
-    participant W as Frontend
-    participant API as API Gateway
-    participant OS as Order Service
-    participant NS as Notif. Service
-    participant DB as Base de Datos
-
-    C->>W: Completa formulario de pedido
-    W->>API: POST /api/pedidos
-    API->>API: Validar token JWT
-    API->>OS: crearPedido(data)
-    OS->>DB: INSERT INTO pedidos
-    DB-->>OS: pedido_id, estado: abierto
-    OS->>NS: notificarEspecialistas(pedido)
-    NS->>DB: INSERT INTO notificaciones
-    DB-->>NS: OK
-    OS-->>API: 201 pedido creado
-    API-->>W: Respuesta exitosa
-    W-->>C: Pedido publicado exitosamente
+</section>
+<!-- Categorías (Bento Grid Style) -->
+<section class="py-xl bg-surface">
+<div class="max-w-container-max mx-auto px-gutter">
+<h2 class="font-headline-lg text-headline-lg mb-xl text-on-surface">Explorá por categorías</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="home_repair_service">home_repair_service</span>
+<span class="font-label-md">Hogar y reparaciones</span>
 </div>
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="school">school</span>
+<span class="font-label-md">Clases y educación</span>
 </div>
-
-<div class="dbox"><div class="dlabel">Secuencia 2 — envío y aceptación de propuesta</div>
-<div class="mermaid">
-sequenceDiagram
-    actor E as Especialista
-    actor C as Cliente
-    participant API as API Gateway
-    participant OS as Order Service
-    participant CS as Chat Service
-    participant NS as Notif. Service
-    participant DB as Base de Datos
-
-    E->>API: POST /api/propuestas
-    API->>API: Validar token y rol
-    API->>OS: enviarPropuesta(data)
-    OS->>DB: INSERT INTO propuestas
-    DB-->>OS: propuesta_id
-    OS->>NS: notificarCliente(propuesta)
-    NS-->>C: Nueva propuesta recibida
-    OS-->>E: 201 Propuesta enviada
-
-    C->>API: GET /api/pedidos/:id/propuestas
-    API->>DB: SELECT propuestas
-    DB-->>API: lista con perfiles
-    API-->>C: 200 Propuestas
-
-    C->>API: PUT /api/propuestas/:id/aceptar
-    API->>OS: aceptarPropuesta(id)
-    OS->>DB: UPDATE propuesta estado=aceptada
-    OS->>DB: UPDATE pedido estado=en_progreso
-    OS->>CS: crearChat(pedidoId)
-    CS->>DB: INSERT INTO chats
-    DB-->>CS: chat_id
-    OS->>NS: notificarEspecialista(aceptacion)
-    NS-->>E: Propuesta aceptada, chat habilitado
-    OS-->>C: 200 Chat disponible
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="content_cut">content_cut</span>
+<span class="font-label-md">Belleza y salud</span>
 </div>
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="devices">devices</span>
+<span class="font-label-md">Diseño y tecnología</span>
 </div>
-
-<div class="dbox"><div class="dlabel">Secuencia 3 — mensajería por WebSocket</div>
-<div class="mermaid">
-sequenceDiagram
-    actor C as Cliente
-    actor E as Especialista
-    participant WS as WebSocket Server
-    participant CS as Chat Service
-    participant DB as Base de Datos
-
-    C->>WS: connect(token, chatId)
-    WS->>CS: validarAcceso(token, chatId)
-    CS->>DB: SELECT chat y participantes
-    DB-->>CS: OK
-    WS-->>C: Conexión establecida
-
-    E->>WS: connect(token, chatId)
-    WS->>CS: validarAcceso(token, chatId)
-    WS-->>E: Conexión establecida
-
-    C->>WS: sendMessage(chatId, texto)
-    WS->>CS: guardarMensaje(data)
-    CS->>DB: INSERT INTO mensajes
-    DB-->>CS: mensaje_id, timestamp
-    WS-->>E: Nuevo mensaje (push)
-    WS-->>C: Mensaje confirmado
-
-    E->>WS: sendMessage(chatId, texto)
-    WS->>CS: guardarMensaje(data)
-    CS->>DB: INSERT INTO mensajes
-    WS-->>C: Nuevo mensaje (push)
-    WS-->>E: Mensaje confirmado
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="pets">pets</span>
+<span class="font-label-md">Mascotas</span>
+</div>
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-md">Mudanzas y transporte</span>
+</div>
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="fitness_center">fitness_center</span>
+<span class="font-label-md">Deporte</span>
+</div>
+<div class="bg-surface-container-low p-lg rounded-xl flex flex-col items-center justify-center gap-sm hover:bg-secondary-container transition-all cursor-pointer border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="gavel">gavel</span>
+<span class="font-label-md">Servicios legales</span>
 </div>
 </div>
 </div>
-
-<!-- ===== DER ===== -->
-<div id="der" class="section">
-<h2>Diagrama de entidad-relación (DER)</h2>
-<p class="sub">Modelo relacional de la base de datos de Mi Chamba. La relación muchos-a-muchos entre <code>perfil_especialista</code> y <code>categoria</code> se implementa con una tabla intermedia.</p>
-<div class="dbox">
-<div class="mermaid">
-erDiagram
-    USUARIO {
-        int id PK
-        varchar nombre
-        varchar apellido
-        varchar email
-        varchar password_hash
-        varchar telefono
-        varchar barrio
-        enum rol
-        bool verificado
-        bool activo
-        timestamp created_at
-    }
-    PERFIL_ESPECIALISTA {
-        int id PK
-        int usuario_id FK
-        text descripcion
-        text experiencia
-        decimal precio_base
-        decimal rating_promedio
-        bool doc_verificado
-    }
-    CATEGORIA {
-        int id PK
-        varchar nombre
-        varchar descripcion
-        varchar icono
-    }
-    PEDIDO {
-        int id PK
-        int cliente_id FK
-        int categoria_id FK
-        text descripcion
-        decimal costo_aproximado
-        varchar barrio
-        enum estado
-        timestamp created_at
-        timestamp updated_at
-    }
-    PROPUESTA {
-        int id PK
-        int pedido_id FK
-        int especialista_id FK
-        text descripcion
-        decimal precio_oferta
-        enum estado
-        timestamp created_at
-    }
-    CHAT {
-        int id PK
-        int pedido_id FK
-        timestamp created_at
-    }
-    MENSAJE {
-        int id PK
-        int chat_id FK
-        int remitente_id FK
-        text contenido
-        bool leido
-        timestamp created_at
-    }
-    RESENA {
-        int id PK
-        int pedido_id FK
-        int autor_id FK
-        int destinatario_id FK
-        int calificacion
-        text comentario
-        timestamp created_at
-    }
-    NOTIFICACION {
-        int id PK
-        int usuario_id FK
-        varchar tipo
-        text contenido
-        bool leido
-        timestamp created_at
-    }
-    RECLAMO {
-        int id PK
-        int pedido_id FK
-        int cliente_id FK
-        text descripcion
-        enum estado
-        timestamp created_at
-    }
-
-    USUARIO ||--o| PERFIL_ESPECIALISTA : "tiene"
-    USUARIO ||--o{ PEDIDO : "publica"
-    USUARIO ||--o{ PROPUESTA : "envía"
-    USUARIO ||--o{ RESENA : "escribe"
-    USUARIO ||--o{ NOTIFICACION : "recibe"
-    USUARIO ||--o{ RECLAMO : "genera"
-    USUARIO ||--o{ MENSAJE : "envía"
-    PERFIL_ESPECIALISTA }o--o{ CATEGORIA : "ofrece servicios en"
-    PEDIDO ||--o{ PROPUESTA : "recibe"
-    PEDIDO ||--o| CHAT : "tiene"
-    PEDIDO ||--o{ RESENA : "origina"
-    PEDIDO ||--o{ RECLAMO : "tiene"
-    PEDIDO }o--|| CATEGORIA : "pertenece a"
-    CHAT ||--o{ MENSAJE : "contiene"
+</section>
+<!-- CTA Especialista -->
+<section class="py-xl">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="bg-primary-container rounded-2xl p-xl flex flex-col md:flex-row items-center justify-between gap-xl shadow-xl overflow-hidden relative">
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-10">
+<img class="w-full h-full object-cover" data-alt="A macro shot of professional hands assembling a complex electronic device with precision tools. The lighting is crisp and cool, highlighting the metallic textures and the focused nature of expert craftsmanship. The color palette centers on professional teals and silver accents, maintaining a modern and sophisticated atmosphere. This visual reinforces the theme of high-quality, specialized service providers within a corporate yet accessible digital ecosystem." src="https://lh3.googleusercontent.com/aida/ADBb0uickWmjzZ9FZjVHjlgihcAlBB5usDk0pKiojB148XSkMWqixk6uPX_7s_vBYHGpwtqFvXvt_VqSkVDfmHm4CMPGwvLg8YhLfrbXGP9gsNQWB-DQYYvT5GNI3gcs6AK5OS2ioMCzSArzFITeuV71pjSY9TKNF4L5BohnQmUMtFG2lhRyRH5TOLJn-kQwql8yf57RDWfeDvG1JHEVCAvwXPs5eLxCHDSSCqGAwEJDoTM3WI7fJWjxyKXk8O9Nmn6GjSw9Dpl31UJIOg"/>
+</div>
+<div class="relative z-10 flex-1">
+<h2 class="font-headline-xl text-headline-xl text-white mb-md">¿Sos especialista?</h2>
+<p class="font-body-lg text-body-lg text-white/90 mb-lg">Registrate gratis y empezá a recibir clientes hoy mismo. Hacé crecer tu negocio con el respaldo de Mi Chamba.</p>
+<button class="bg-white text-primary px-xl py-md rounded-xl font-headline-md hover:bg-surface-container-lowest transition-colors shadow-lg">Quiero registrarme como especialista</button>
+</div>
+<div class="hidden lg:block relative z-10">
+<span class="material-symbols-outlined text-white text-[120px] opacity-20" data-icon="work">work</span>
 </div>
 </div>
 </div>
-
-<!-- ===== COMPONENTS ===== -->
-<div id="comp" class="section">
-<h2>Diagrama de componentes</h2>
-<p class="sub">Arquitectura de componentes del sistema Mi Chamba con separación en capas cliente, API Gateway, servicios backend y capa de datos.</p>
-<div class="dbox">
-<div class="mermaid">
-graph TB
-    subgraph CL["Capa cliente"]
-        WEB["Web App\nReact / Next.js"]
-        APK["Android App MVP"]
-    end
-
-    GW["API Gateway\nREST + WebSocket"]
-
-    subgraph BE["Servicios backend"]
-        AUTH["Auth Service\nJWT + bcrypt"]
-        ORDERS["Order Service\nGestión de pedidos"]
-        PROP["Proposal Service\nGestión de propuestas"]
-        CHAT["Chat Service\nWebSocket"]
-        NOTIF["Notification Service\nPush + In-app"]
-        ADMIN["Admin Service\nPanel de control"]
-        FILES["File Service\nSubida de docs"]
-    end
-
-    subgraph DATA["Capa de datos"]
-        DB[("PostgreSQL\nDatos principales")]
-        CACHE[("Redis\nSesiones y cache")]
-        FS["File Storage\nDocumentos"]
-    end
-
-    WEB -->|HTTPS| GW
-    APK -->|HTTPS| GW
-    GW --> AUTH
-    GW --> ORDERS
-    GW --> PROP
-    GW --> CHAT
-    GW --> NOTIF
-    GW --> ADMIN
-    GW --> FILES
-    AUTH --> DB
-    AUTH --> CACHE
-    ORDERS --> DB
-    PROP --> DB
-    CHAT --> DB
-    CHAT --> CACHE
-    NOTIF --> DB
-    ADMIN --> DB
-    FILES --> FS
+</section>
+<!-- FAQ -->
+<section class="py-xl bg-surface-container-low">
+<div class="max-w-3xl mx-auto px-gutter">
+<h2 class="font-headline-lg text-headline-lg text-center mb-xl text-on-surface">Preguntas frecuentes</h2>
+<div class="space-y-md">
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm" open="">
+<summary class="flex justify-between items-center p-lg cursor-pointer list-none font-headline-md text-on-surface">
+                            ¿Tiene algún costo publicar un pedido?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-lg pt-0 text-on-surface-variant text-body-md border-t border-outline-variant/10 mt-2">
+                            No, publicar tu necesidad es totalmente gratuito. Solo pagás el precio que acuerdes con el especialista que elijas contratar.
+                        </div>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<summary class="flex justify-between items-center p-lg cursor-pointer list-none font-headline-md text-on-surface">
+                            ¿Cómo sé si un especialista es confiable?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-lg pt-0 text-on-surface-variant text-body-md border-t border-outline-variant/10 mt-2">
+                            En Mi Chamba verificamos la documentación de cada profesional. Además, podés revisar las calificaciones y comentarios que otros usuarios dejaron sobre su trabajo.
+                        </div>
+</details>
+<details class="group bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm">
+<summary class="flex justify-between items-center p-lg cursor-pointer list-none font-headline-md text-on-surface">
+                            ¿Qué pasa si no encuentro lo que busco?
+                            <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-lg pt-0 text-on-surface-variant text-body-md border-t border-outline-variant/10 mt-2">
+                            Nuestra base de datos crece día a día. Si no encontrás una categoría específica, podés escribirnos y te ayudaremos a contactar con el profesional adecuado.
+                        </div>
+</details>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between items-start py-xl px-gutter max-w-container-max mx-auto gap-xl">
+<div class="flex flex-col gap-md">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface dark:text-inverse-on-surface">Mi Chamba</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant dark:text-inverse-on-surface max-w-xs">
+                    © 2024 Mi Chamba. Encontrá lo que necesitás en un solo lugar con la confianza de siempre.
+                </p>
+<div class="flex gap-md mt-sm">
+<span class="material-symbols-outlined text-primary opacity-80 hover:opacity-100 cursor-pointer" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary opacity-80 hover:opacity-100 cursor-pointer" data-icon="photo_camera">photo_camera</span>
+<span class="material-symbols-outlined text-primary opacity-80 hover:opacity-100 cursor-pointer" data-icon="alternate_email">alternate_email</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-xl lg:flex lg:gap-xl">
+<div class="flex flex-col gap-sm">
+<span class="text-primary dark:text-primary-fixed font-semibold mb-sm">Empresa</span>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Sobre nosotros</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Contacto</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Ayuda</a>
+</div>
+<div class="flex flex-col gap-sm">
+<span class="text-primary dark:text-primary-fixed font-semibold mb-sm">Legal</span>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Términos y condiciones</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors font-label-sm" href="#">Privacidad</a>
+</div>
+</div>
+<div class="bg-surface-container p-lg rounded-xl max-w-sm">
+<p class="font-headline-sm text-headline-sm text-on-surface mb-sm">Recibí novedades</p>
+<div class="flex gap-xs">
+<input class="bg-surface-container-lowest border-outline-variant rounded-lg flex-1 px-md py-sm focus:ring-primary focus:border-primary" placeholder="Tu email" type="email"/>
+<button class="bg-primary text-white p-sm rounded-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
 </div>
 </div>
 </div>
-
-<!-- ===== GANTT ===== -->
-<div id="gantt" class="section">
-<h2>Diagrama de Gantt</h2>
-<p class="sub">Cronograma estimado del proyecto Mi Chamba en 14 semanas, desde la planificación inicial hasta la presentación final.</p>
-<div class="dbox" style="overflow-x:auto;min-height:300px">
-<div class="mermaid">
-gantt
-    title Cronograma Proyecto Mi Chamba — 14 semanas
-    dateFormat YYYY-MM-DD
-
-    section Planificación
-    Relevamiento y análisis          :a1, 2025-04-03, 7d
-    Buyer Persona y benchmarking     :a2, 2025-04-03, 7d
-    Definición de requerimientos     :a3, after a1, 7d
-    Análisis de viabilidad           :a4, after a1, 5d
-
-    section Diseño
-    Arquitectura del sistema         :b1, 2025-04-17, 7d
-    Wireframes y prototipos UX/UI    :b2, 2025-04-17, 10d
-    Landing Page                     :b3, 2025-04-24, 5d
-    Estilo visual y design system    :b4, 2025-04-17, 5d
-
-    section Backend
-    Setup proyecto y base de datos   :c1, 2025-04-30, 5d
-    Auth Service                     :c2, after c1, 5d
-    Order y Proposal Service         :c3, after c2, 7d
-    Chat Service WebSocket           :c4, after c3, 5d
-    Notification Service             :c5, after c3, 4d
-    Panel de administración          :c6, after c4, 7d
-
-    section Frontend Web
-    Módulo de autenticación          :d1, 2025-05-07, 5d
-    Módulo de pedidos                :d2, after d1, 7d
-    Módulo propuestas y chat         :d3, after d2, 7d
-    Reseñas, perfil y notificaciones :d4, after d3, 5d
-
-    section App Android MVP
-    Setup Android                    :e1, 2025-05-21, 5d
-    Auth y pedidos APK               :e2, after e1, 7d
-    Propuestas, chat y notificaciones:e3, after e2, 7d
-
-    section QA y Pruebas
-    Pruebas funcionales              :f1, 2025-06-19, 7d
-    Pruebas de UX y usabilidad       :f2, after f1, 5d
-    Pruebas de seguridad             :f3, after f1, 5d
-    Corrección de errores            :f4, after f2, 5d
-
-    section Entrega Final
-    Documentación técnica completa   :g1, 2025-07-09, 5d
-    Preparación demo                 :g2, after g1, 3d
-    Presentación final               :g3, after g2, 1d
+<div class="max-w-container-max mx-auto px-gutter py-md border-t border-outline-variant/30 text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2025 Mi Chamba. Todos los derechos reservados.</p>
 </div>
-</div>
-</div>
-
-<!-- ===== RNF ===== -->
-<div id="rnf" class="section">
-<h2>Requisitos no funcionales</h2>
-<p class="sub">Atributos de calidad del sistema Mi Chamba. Aplican tanto a la plataforma web como a la aplicación Android salvo indicación contraria.</p>
-
-<table>
-<thead><tr><th>ID</th><th>Categoría</th><th>Nombre</th><th>Descripción</th><th>Métrica / criterio de aceptación</th><th>Prioridad</th></tr></thead>
-<tbody>
-
-<tr class="grp"><td colspan="6">Rendimiento</td></tr>
-<tr><td><code>RNF-01</code></td><td>Rendimiento</td><td>Tiempo de respuesta de la API</td><td>Las llamadas a la API REST deben responder en condiciones normales de carga.</td><td>P95 ≤ 500 ms para endpoints de lectura; ≤ 1000 ms para escritura.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-02</code></td><td>Rendimiento</td><td>Latencia del chat</td><td>Los mensajes enviados por WebSocket deben entregarse al destinatario con baja latencia.</td><td>Latencia extremo a extremo ≤ 300 ms en condiciones normales de red.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-03</code></td><td>Rendimiento</td><td>Carga de la página web</td><td>La plataforma web debe cargarse rápidamente en dispositivos de gama media con conexión móvil.</td><td>First Contentful Paint ≤ 2 s. Largest Contentful Paint ≤ 3 s.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-04</code></td><td>Rendimiento</td><td>Usuarios concurrentes</td><td>El sistema debe soportar un número razonable de usuarios activos simultáneamente en el MVP sin degradación notable.</td><td>Sin degradación medible con hasta 200 usuarios concurrentes.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-05</code></td><td>Rendimiento</td><td>Paginación de feeds</td><td>Los feeds de pedidos y listas extensas deben paginar resultados para no sobrecargar la red ni el cliente.</td><td>Máximo 20 ítems por página. Cursor-based pagination en la API.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Seguridad</td></tr>
-<tr><td><code>RNF-06</code></td><td>Seguridad</td><td>Cifrado de contraseñas</td><td>Las contraseñas de usuario no deben almacenarse en texto plano en ningún caso.</td><td>Hash con bcrypt, factor de costo mínimo 12. Sin almacenamiento de contraseña en claro.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-07</code></td><td>Seguridad</td><td>Transporte cifrado</td><td>Toda comunicación entre clientes y servidor debe realizarse sobre conexiones cifradas.</td><td>HTTPS obligatorio en todos los endpoints. HTTP redirige a HTTPS. WebSocket sobre WSS.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-08</code></td><td>Seguridad</td><td>Gestión de tokens JWT</td><td>Los tokens de acceso deben tener vida corta. Los refresh tokens deben rotarse al usarse.</td><td>Access token: expiración ≤ 15 min. Refresh token: expiración ≤ 7 días con rotación.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-09</code></td><td>Seguridad</td><td>Autorización por rol</td><td>Los endpoints de la API deben verificar el rol del usuario autenticado antes de ejecutar cualquier acción.</td><td>Guards de NestJS aplicados a todos los controladores. Tests de acceso cruzado entre roles.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-10</code></td><td>Seguridad</td><td>Protección contra XSS</td><td>El sistema debe sanitizar todas las entradas de usuario antes de almacenarlas o renderizarlas.</td><td>Salida de datos de usuario siempre escapada. Sin innerHTML con datos sin sanitizar.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-11</code></td><td>Seguridad</td><td>Protección contra inyección SQL</td><td>No deben construirse queries SQL concatenando strings de entrada del usuario.</td><td>Todas las consultas a la base de datos a través de Prisma (queries parametrizadas). Cero SQL crudo con interpolación de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-12</code></td><td>Seguridad</td><td>Rate limiting</td><td>Los endpoints de autenticación y publicación deben limitar la cantidad de solicitudes por IP para prevenir ataques de fuerza bruta y spam.</td><td>Máximo 10 intentos de login por IP por minuto. Máximo 20 publicaciones de pedido por usuario por hora.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-13</code></td><td>Seguridad</td><td>Validación de archivos subidos</td><td>Los documentos subidos para verificación deben validarse en tipo y tamaño antes de almacenarse.</td><td>Tipos permitidos: PDF, JPG, PNG. Tamaño máximo: 5 MB por archivo.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Usabilidad</td></tr>
-<tr><td><code>RNF-14</code></td><td>Usabilidad</td><td>Diseño responsive web</td><td>La plataforma web debe funcionar correctamente en resoluciones de escritorio, tablet y móvil.</td><td>Sin scroll horizontal ni elementos superpuestos en viewports desde 375 px hasta 1920 px.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-15</code></td><td>Usabilidad</td><td>Compatibilidad de navegadores</td><td>La web debe funcionar correctamente en los navegadores de mayor uso.</td><td>Chrome, Firefox y Safari en sus dos últimas versiones principales. Edge en su última versión.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-16</code></td><td>Usabilidad</td><td>Mensajes de error comprensibles</td><td>Los mensajes de error del sistema deben ser claros para el usuario final, sin exponer detalles técnicos internos.</td><td>Ningún stack trace ni mensaje de base de datos visible en la interfaz de usuario.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-17</code></td><td>Usabilidad</td><td>Feedback de acciones</td><td>El sistema debe confirmar visualmente al usuario el resultado de cada acción relevante (publicar pedido, enviar propuesta, etc.).</td><td>Toda acción con efecto persistente muestra un mensaje de éxito o error en ≤ 1 s.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-18</code></td><td>Usabilidad</td><td>Accesibilidad básica</td><td>La interfaz web debe ser navegable con teclado y compatible con lectores de pantalla básicos.</td><td>Todos los formularios tienen labels asociados. Imágenes tienen texto alternativo. Contraste de color ≥ 4.5:1 (WCAG AA).</td><td><span class="b-hi lo">Baja</span></td></tr>
-
-<tr class="grp"><td colspan="6">Disponibilidad y confiabilidad</td></tr>
-<tr><td><code>RNF-19</code></td><td>Disponibilidad</td><td>Uptime del servicio</td><td>El sistema debe estar disponible la mayor parte del tiempo en horario de uso típico.</td><td>Disponibilidad ≥ 99 % mensual. Mantenimientos programados fuera del horario pico (00:00–06:00 ART).</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-20</code></td><td>Disponibilidad</td><td>Manejo de errores del servidor</td><td>Ante fallos internos, el sistema debe responder con códigos HTTP apropiados sin exponer información sensible.</td><td>Errores 5xx retornan JSON con mensaje genérico. Logging interno del error completo.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-21</code></td><td>Disponibilidad</td><td>Backups de la base de datos</td><td>Los datos de usuarios, pedidos y transacciones deben respaldarse periódicamente.</td><td>Backup automático diario del PostgreSQL administrado. Retención mínima de 7 días.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-22</code></td><td>Confiabilidad</td><td>Consistencia de datos</td><td>Las operaciones críticas (aceptar propuesta, cambiar estado de pedido) deben ser atómicas para evitar estados inconsistentes.</td><td>Uso de transacciones de base de datos en operaciones que modifican múltiples tablas.</td><td><span class="b-hi hi">Alta</span></td></tr>
-
-<tr class="grp"><td colspan="6">Escalabilidad y mantenibilidad</td></tr>
-<tr><td><code>RNF-23</code></td><td>Escalabilidad</td><td>Escalado horizontal del backend</td><td>El backend debe poder escalar agregando instancias sin cambios de arquitectura significativos.</td><td>El servidor NestJS no guarda estado en memoria entre requests. Sesiones en Redis (post-MVP).</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-24</code></td><td>Escalabilidad</td><td>Separación por módulos</td><td>La arquitectura del backend debe permitir modificar o reemplazar un módulo sin afectar a los demás.</td><td>Cada dominio (auth, pedidos, propuestas, chat, etc.) en su propio módulo NestJS con interfaces definidas.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-25</code></td><td>Mantenibilidad</td><td>Cobertura de tests</td><td>El código crítico del backend debe contar con tests automatizados para prevenir regresiones.</td><td>Cobertura mínima del 60 % en servicios de dominio. Tests de integración para los flujos principales.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-26</code></td><td>Mantenibilidad</td><td>Documentación de la API</td><td>La API REST debe estar documentada de forma que cualquier miembro del equipo pueda consumirla sin consultar el código fuente.</td><td>Swagger generado automáticamente con @nestjs/swagger. Disponible en /api/docs en entorno de desarrollo.</td><td><span class="b-hi mi">Media</span></td></tr>
-<tr><td><code>RNF-27</code></td><td>Mantenibilidad</td><td>Tipado estricto</td><td>El código TypeScript del proyecto debe ejecutarse sin errores de tipo en modo estricto.</td><td>strict: true en tsconfig. CI rechaza builds con errores de tipo.</td><td><span class="b-hi mi">Media</span></td></tr>
-
-<tr class="grp"><td colspan="6">Privacidad y datos personales</td></tr>
-<tr><td><code>RNF-28</code></td><td>Privacidad</td><td>Datos mínimos requeridos</td><td>El sistema solo debe solicitar los datos personales estrictamente necesarios para el funcionamiento de la plataforma.</td><td>Sin campos opcionales marcados como obligatorios. Sin recolección de datos de ubicación en tiempo real.</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-29</code></td><td>Privacidad</td><td>Acceso a datos propios</td><td>Cada usuario solo puede acceder y modificar su propia información personal.</td><td>Ningún endpoint expone datos de un usuario a otro sin relación activa (pedido compartido).</td><td><span class="b-hi hi">Alta</span></td></tr>
-<tr><td><code>RNF-30</code></td><td>Privacidad</td><td>Eliminación de cuenta</td><td>El usuario debe poder solicitar la eliminación de su cuenta y datos personales.</td><td>Funcionalidad de baja de cuenta disponible. Datos personales anonimizados o eliminados en un plazo razonable.</td><td><span class="b-hi lo">Baja</span></td></tr>
-
-</tbody>
-</table>
-</div><!-- /rnf -->
-
-<!-- ===== ARQUITECTURA ===== -->
-<div id="arq" class="section">
-<h2>Diagrama de arquitectura</h2>
-<p class="sub">Vista del sistema Mi Chamba desde una perspectiva arquitectónica: actores, plataformas de acceso, capa de servicios y capa de datos. Se muestran los aspectos más importantes del diseño, dejando los detalles de implementación de lado.</p>
-
-<!-- VISTA LÓGICA -->
-<div class="dbox">
-<div class="dlabel">Vista lógica — actores, plataformas y servicios</div>
-<div style="overflow-x:auto">
-<div style="min-width:700px;padding:8px 0">
-
-<!-- ACTORES -->
-<div style="display:flex;gap:12px;margin-bottom:16px">
-
-  <!-- CLIENTE -->
-  <div style="flex:1;background:#eff6ff;border:1.5px solid #93c5fd;border-radius:10px;padding:14px 16px">
-    <div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Cliente</div>
-    <div style="display:flex;gap:8px">
-      <div style="flex:1;background:#fff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 8px;text-align:center">
-        <div style="font-size:22px;margin-bottom:4px">🖥</div>
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Web App</div>
-        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Publicar pedidos</div>
-        <div style="font-size:10.5px;color:#64748b">Ver propuestas</div>
-        <div style="font-size:10.5px;color:#64748b">Chat · Reseñas</div>
-      </div>
-      <div style="flex:1;background:#fff;border:1px solid #bfdbfe;border-radius:7px;padding:10px 8px;text-align:center">
-        <div style="font-size:22px;margin-bottom:4px">📱</div>
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Mobile App</div>
-        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Publicar pedidos</div>
-        <div style="font-size:10.5px;color:#64748b">Propuestas · Chat</div>
-        <div style="font-size:10.5px;color:#64748b">Notificaciones push</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ESPECIALISTA -->
-  <div style="flex:1;background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 16px">
-    <div style="font-size:11px;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Especialista</div>
-    <div style="display:flex;gap:8px">
-      <div style="flex:1;background:#fff;border:1px solid #bbf7d0;border-radius:7px;padding:10px 8px;text-align:center">
-        <div style="font-size:22px;margin-bottom:4px">🖥</div>
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Web App</div>
-        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Perfil profesional</div>
-        <div style="font-size:10.5px;color:#64748b">Feed de pedidos</div>
-        <div style="font-size:10.5px;color:#64748b">Verificación de identidad</div>
-      </div>
-      <div style="flex:1;background:#fff;border:1px solid #bbf7d0;border-radius:7px;padding:10px 8px;text-align:center">
-        <div style="font-size:22px;margin-bottom:4px">📱</div>
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Mobile App</div>
-        <div style="font-size:10.5px;color:#64748b;margin-top:3px">Feed filtrado</div>
-        <div style="font-size:10.5px;color:#64748b">Enviar propuestas</div>
-        <div style="font-size:10.5px;color:#64748b">Notificaciones push</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ADMIN -->
-  <div style="flex:0 0 160px;background:#fef3c7;border:1.5px solid #fcd34d;border-radius:10px;padding:14px 16px">
-    <div style="font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Administrador</div>
-    <div style="background:#fff;border:1px solid #fde68a;border-radius:7px;padding:10px 8px;text-align:center">
-      <div style="font-size:22px;margin-bottom:4px">🖥</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Panel Admin</div>
-      <div style="font-size:10.5px;color:#64748b;margin-top:3px">Gestión de usuarios</div>
-      <div style="font-size:10.5px;color:#64748b">Verificaciones</div>
-      <div style="font-size:10.5px;color:#64748b">Reclamos · Reportes</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- FLECHA -->
-<div style="text-align:center;color:#94a3b8;font-size:20px;margin:2px 0 2px;letter-spacing:2px">↓ &nbsp; REST / HTTPS &nbsp; · &nbsp; WebSocket (WSS) &nbsp; · &nbsp; Push Notifications ↓</div>
-
-<!-- API GATEWAY -->
-<div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:10px;padding:12px 16px;margin:10px 0;text-align:center">
-  <div style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">API Gateway · NestJS</div>
-  <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Auth Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Order Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Proposal Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Chat Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Notification Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">Admin Service</span>
-    <span style="background:#fff;border:1px solid #99f6e4;border-radius:5px;padding:4px 10px;font-size:11px;color:#1e293b">File Service</span>
-  </div>
-</div>
-
-<!-- FLECHA -->
-<div style="text-align:center;color:#94a3b8;font-size:20px;margin:2px 0 2px">↓ &nbsp; Prisma ORM &nbsp; · &nbsp; Queries parametrizadas ↓</div>
-
-<!-- DATOS -->
-<div style="display:flex;gap:12px;margin-top:10px">
-  <div style="flex:2;background:#f5f3ff;border:1.5px solid #a78bfa;border-radius:10px;padding:12px 14px;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#6d28d9;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Base de datos principal</div>
-    <div style="font-size:13px;font-weight:600;color:#1e293b">PostgreSQL</div>
-    <div style="font-size:11px;color:#64748b;margin-top:4px">Usuarios · Pedidos · Propuestas · Chats · Reseñas · Reclamos</div>
-  </div>
-  <div style="flex:1;background:#fff7ed;border:1.5px solid #fdba74;border-radius:10px;padding:12px 14px;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#c2410c;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Cache</div>
-    <div style="font-size:13px;font-weight:600;color:#1e293b">Redis</div>
-    <div style="font-size:11px;color:#64748b;margin-top:4px">Sesiones · WebSocket rooms</div>
-  </div>
-  <div style="flex:1;background:#fdf4ff;border:1.5px solid #e879f9;border-radius:10px;padding:12px 14px;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#86198f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Storage</div>
-    <div style="font-size:13px;font-weight:600;color:#1e293b">Cloudinary / S3</div>
-    <div style="font-size:11px;color:#64748b;margin-top:4px">Fotos de perfil · Documentos de verificación</div>
-  </div>
-</div>
-
-</div><!-- min-width -->
-</div><!-- overflow -->
-</div><!-- dbox -->
-
-<!-- VISTA DESPLIEGUE -->
-<div class="dbox">
-<div class="dlabel">Vista de despliegue — infraestructura y tecnologías</div>
-<div style="overflow-x:auto">
-<div style="min-width:700px;padding:8px 0">
-
-<div style="display:flex;gap:12px;align-items:stretch">
-
-  <!-- CLIENTE LADO -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Clientes</div>
-
-    <div style="background:#eff6ff;border:1.5px solid #93c5fd;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:6px">🌐 Vercel</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">Next.js + React</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">SSR · TypeScript · Deploy automático desde GitHub</div>
-      <div style="margin-top:6px;font-size:10.5px;background:#dbeafe;border-radius:4px;padding:3px 7px;display:inline-block;color:#1d4ed8">titowanobacoa.github.io → vercel.app</div>
-    </div>
-
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">📱 Expo / EAS Build</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">React Native + TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">Android MVP · Push via Expo Notifications (FCM)</div>
-      <div style="margin-top:6px;font-size:10.5px;background:#bbf7d0;border-radius:4px;padding:3px 7px;display:inline-block;color:#15803d">APK distribución directa (MVP)</div>
-    </div>
-  </div>
-
-  <!-- FLECHAS CENTRO -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:#94a3b8;font-size:12px;min-width:90px;text-align:center">
-    <div style="font-size:18px">⟷</div>
-    <div>HTTPS</div>
-    <div style="margin-top:8px;font-size:18px">⟷</div>
-    <div>WSS</div>
-  </div>
-
-  <!-- BACKEND -->
-  <div style="flex:1.3;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Backend</div>
-
-    <div style="background:#e0f2f1;border:1.5px solid #0f766e;border-radius:9px;padding:12px 14px;flex:1">
-      <div style="font-size:12px;font-weight:700;color:#0f766e;margin-bottom:6px">🚂 Railway</div>
-      <div style="font-size:11.5px;font-weight:600;color:#1e293b">NestJS · TypeScript</div>
-      <div style="font-size:11px;color:#64748b;margin-top:3px">REST API · WebSocket (Socket.IO) · JWT Auth</div>
-      <div style="font-size:11px;color:#64748b;margin-top:2px">Guards por rol · Rate limiting · Swagger</div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">PostgreSQL (Railway managed)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Prisma ORM · Backups diarios · 7 días retención</div>
-      </div>
-      <div style="margin-top:8px;border-top:1px solid #99f6e4;padding-top:8px">
-        <div style="font-size:11.5px;font-weight:600;color:#1e293b">Redis (post-MVP)</div>
-        <div style="font-size:11px;color:#64748b;margin-top:2px">Sesiones · Refresh tokens · WebSocket rooms</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FLECHAS DERECHA -->
-  <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;color:#94a3b8;font-size:12px;min-width:70px;text-align:center">
-    <div style="font-size:18px">⟶</div>
-    <div>HTTP</div>
-  </div>
-
-  <!-- SERVICIOS EXTERNOS -->
-  <div style="flex:1;display:flex;flex-direction:column;gap:10px">
-    <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Servicios externos</div>
-
-    <div style="background:#fdf4ff;border:1.5px solid #e879f9;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#86198f;margin-bottom:4px">☁️ Cloudinary / S3</div>
-      <div style="font-size:11px;color:#64748b">Fotos de perfil y documentos de verificación</div>
-    </div>
-
-    <div style="background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#c2410c;margin-bottom:4px">📧 Resend / SendGrid</div>
-      <div style="font-size:11px;color:#64748b">Email transaccional: bienvenida, verificación, alertas</div>
-    </div>
-
-    <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:9px;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:4px">🔔 Expo Push / FCM</div>
-      <div style="font-size:11px;color:#64748b">Notificaciones push a dispositivos Android</div>
-    </div>
-  </div>
-
-</div><!-- flex row -->
-
-<!-- LEYENDA PROTOCOLOS -->
-<div style="margin-top:16px;padding:10px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;display:flex;gap:20px;flex-wrap:wrap">
-  <span style="font-size:11.5px;color:#475569"><strong>HTTPS</strong> — comunicación web y mobile con la API</span>
-  <span style="font-size:11.5px;color:#475569"><strong>WSS</strong> — WebSocket seguro para el chat en tiempo real</span>
-  <span style="font-size:11.5px;color:#475569"><strong>Prisma ORM</strong> — queries tipadas y parametrizadas contra PostgreSQL</span>
-  <span style="font-size:11.5px;color:#475569"><strong>JWT + Refresh tokens</strong> — autenticación stateless entre cliente y API</span>
-</div>
-
-</div><!-- min-width -->
-</div><!-- overflow -->
-</div><!-- dbox -->
-
-</div><!-- /arq -->
-
-</div><!-- /wrap -->
-
-<script type="module">
-import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
-
-mermaid.initialize({
-  startOnLoad: false,
-  theme: 'base',
-  fontFamily: 'system-ui, -apple-system, sans-serif',
-  fontSize: 13,
-  themeVariables: {
-    background: '#ffffff',
-    primaryColor: '#e0f2f1',
-    primaryTextColor: '#1e293b',
-    primaryBorderColor: '#0f766e',
-    lineColor: '#475569',
-    secondaryColor: '#f1f5f9',
-    tertiaryColor: '#f8fafc',
-    edgeLabelBackground: '#ffffff',
-    textColor: '#1e293b',
-    labelTextColor: '#1e293b',
-    nodeTextColor: '#1e293b',
-    titleColor: '#1e293b',
-    actorTextColor: '#1e293b',
-    actorBorder: '#0f766e',
-    actorBkg: '#e0f2f1',
-    actorLineColor: '#475569',
-    signalColor: '#1e293b',
-    signalTextColor: '#1e293b',
-    labelBoxBkgColor: '#f1f5f9',
-    labelBoxBorderColor: '#cbd5e1',
-    labelTextColor: '#1e293b',
-    loopTextColor: '#1e293b',
-    noteBorderColor: '#0f766e',
-    noteBkgColor: '#f0fdf4',
-    noteTextColor: '#1e293b',
-    activationBorderColor: '#0f766e',
-    activationBkgColor: '#ccfbf1',
-    sequenceNumberColor: '#ffffff',
-    sectionBkgColor: '#e0f2f1',
-    altSectionBkgColor: '#f8fafc',
-    sectionBkgColor2: '#ccfbf1',
-    taskBorderColor: '#0f766e',
-    taskBkgColor: '#0f766e',
-    taskTextColor: '#ffffff',
-    taskTextLightColor: '#ffffff',
-    taskTextOutsideColor: '#1e293b',
-    taskTextClickableColor: '#1e293b',
-    activeTaskBorderColor: '#0369a1',
-    activeTaskBkgColor: '#0369a1',
-    gridColor: '#e2e8f0',
-    doneTaskBkgColor: '#64748b',
-    doneTaskBorderColor: '#475569',
-    critBorderColor: '#dc2626',
-    critBkgColor: '#fee2e2',
-    todayLineColor: '#dc2626',
-    sectionBkgColor: '#dbeafe',
-    altSectionBkgColor: '#f0fdf4',
-    fontFamily: 'system-ui, -apple-system, sans-serif',
-    fontSize: '13px',
-    attributeBackgroundColorEven: '#f8fafc',
-    attributeBackgroundColorOdd: '#f1f5f9',
-    classText: '#1e293b',
-    fillType0: '#e0f2f1',
-    fillType1: '#dbeafe',
-    fillType2: '#fef3c7',
-    fillType3: '#fce7f3',
-    fillType4: '#f0fdf4',
-    fillType5: '#fdf4ff',
-    fillType6: '#fff7ed',
-    fillType7: '#f8fafc',
-  },
-  gantt: { barHeight: 20, fontSize: 12, barGap: 4, topPadding: 55, leftPadding: 120 },
-  flowchart: { curve: 'basis', useMaxWidth: true },
-  sequence: { useMaxWidth: true, messageFont: 'system-ui', noteFontSize: 13, actorFontSize: 13 },
-  er: { useMaxWidth: true, fontSize: 13 }
-});
-
-const done = new Set();
-
-async function renderSection(id) {
-  if (done.has(id)) return;
-  done.add(id);
-  const sec = document.getElementById(id);
-  if (!sec) return;
-  const nodes = [...sec.querySelectorAll('.mermaid')];
-  if (!nodes.length) return;
-  try { await mermaid.run({ nodes }); } catch(e) { console.warn('Mermaid:', id, e); }
-}
-
-window.show = async function(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  await renderSection(id);
-};
-
-renderSection('rf-web');
-</script>
-</body>
-</html>
+</footer>
+</body></html>
