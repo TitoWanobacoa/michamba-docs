@@ -56,6 +56,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 5px;borde
     <button class="tab" onclick="show('gantt',this)">Gantt</button>
     <button class="tab" onclick="show('rnf',this)">RNF</button>
     <button class="tab" onclick="show('arq',this)">Arquitectura</button>
+    <button class="tab" onclick="show('manual',this)">Manual de Usuario</button>
   </div>
 </div>
 
@@ -998,6 +999,50 @@ gantt
 </div><!-- dbox -->
 
 </div><!-- /arq -->
+
+<!-- ===== MANUAL DE USUARIO ===== -->
+<div id="manual" class="section">
+<h2>Manual de Usuario</h2>
+<p class="sub">Guía de uso de Mi Chamba para los tres roles del sistema: Cliente, Especialista y Administrador.</p>
+
+<div class="dbox">
+<div class="dlabel">Cliente — publicar un pedido y gestionar propuestas</div>
+<ol style="margin-left:18px;line-height:1.9">
+<li><strong>Registro e inicio de sesión:</strong> creá una cuenta seleccionando el rol "Cliente", o iniciá sesión si ya tenés una cuenta.</li>
+<li><strong>Publicar un pedido:</strong> en "Mis Pedidos", hacé clic en "Nuevo Pedido" y completá categoría, descripción del problema, barrio y costo aproximado.</li>
+<li><strong>Ver propuestas recibidas:</strong> entrá al detalle del pedido para ver la lista de especialistas que ofertaron, con precio, mensaje y versión de cada propuesta.</li>
+<li><strong>Aceptar una propuesta:</strong> hacé clic en "Aceptar propuesta". El pedido pasa a estado "En progreso" y se habilita el chat con el especialista elegido.</li>
+<li><strong>Rechazar una propuesta:</strong> hacé clic en "Rechazar". El especialista es notificado del rechazo y la propuesta queda bloqueada para edición de su lado.</li>
+<li><strong>Chatear con un especialista:</strong> desde "Ir al Chat" podés coordinar detalles. El panel lateral muestra el estado y precio de la propuesta activa de esa conversación, con accesos directos para aceptar/rechazar/retirar según corresponda.</li>
+<li><strong>Reportar una conversación:</strong> si hay un problema con un especialista, usá el botón "Reportar conversación" dentro del chat, indicando el motivo. El administrador recibe una notificación con los datos del reporte.</li>
+</ol>
+</div>
+
+<div class="dbox">
+<div class="dlabel">Especialista — ofertar y gestionar propuestas</div>
+<ol style="margin-left:18px;line-height:1.9">
+<li><strong>Registro e inicio de sesión:</strong> creá una cuenta seleccionando el rol "Especialista".</li>
+<li><strong>Explorar pedidos:</strong> en el Feed se listan los pedidos abiertos publicados por clientes, con filtros por categoría y barrio.</li>
+<li><strong>Enviar una propuesta:</strong> seleccioná un pedido y enviá tu oferta indicando precio y un mensaje descriptivo del trabajo.</li>
+<li><strong>Seguimiento en "Mis Trabajos &gt; Mis Propuestas":</strong> ahí se listan todas tus propuestas activas e históricas con su estado (Pendiente, Aceptada, Rechazada, Retirada).</li>
+<li><strong>Editar una propuesta pendiente:</strong> mientras esté en estado "Pendiente" podés modificar precio y mensaje; queda un historial de versiones.</li>
+<li><strong>Retirar una propuesta:</strong> si ya no podés tomar el trabajo, retirala desde el chat o desde el detalle del pedido. El cliente ve la propuesta marcada como "Retirada" y deja de poder aceptarla.</li>
+<li><strong>Reactivar una propuesta retirada:</strong> podés volver a editarla; al guardar, vuelve automáticamente a estado "Pendiente" y el cliente puede evaluarla de nuevo. Una propuesta <strong>rechazada</strong> por el cliente, en cambio, no puede editarse ni reactivarse.</li>
+<li><strong>Chat y reportes:</strong> mismo funcionamiento que para el cliente — coordinación por chat y botón de reporte disponible ante cualquier inconveniente.</li>
+</ol>
+</div>
+
+<div class="dbox">
+<div class="dlabel">Administrador — gestión de la plataforma</div>
+<ol style="margin-left:18px;line-height:1.9">
+<li><strong>Inicio de sesión:</strong> con las credenciales de administrador provistas en la sección de Usuarios de este documento.</li>
+<li><strong>Listado de usuarios:</strong> el panel admin permite ver todos los clientes y especialistas registrados en la plataforma.</li>
+<li><strong>Notificación de reportes:</strong> cuando un cliente o especialista reporta una conversación, el sistema genera una notificación con quién reportó, a quién, cuándo y el motivo indicado.</li>
+</ol>
+<div class="note info" style="margin-top:14px">El panel visual de monitoreo de reportes (para revisar y resolver cada reporte desde la interfaz admin) está en desarrollo — actualmente la notificación queda registrada en el sistema con todos los datos necesarios, pendiente de una vista dedicada para gestionarlos.</div>
+</div>
+
+</div><!-- /manual -->
 
 </div><!-- /wrap -->
 
